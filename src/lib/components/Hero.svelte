@@ -1,11 +1,10 @@
 <script lang="ts">
-	import search from '$lib/icon/fi_search.png';
-	import map from '$lib/icon/fi_map-pin.png';
 	import ActionButton from './ActionButton.svelte';
 	import illustration from '$lib/icon/Illustration.png';
 	import Features from './Features.svelte';
 	import building from "$lib/icon/buildings-duotone.png"
 	import users from "$lib/icon/users-duotone.png"
+	import Search from './Search.svelte';
 </script>
 
 <div class="relative h-fit w-full bg-gray-100 px-20 py-8">
@@ -33,32 +32,7 @@
 				>
 					<div class="flex items-center justify-center">
 						<!-- search input -->
-						<div class="flex h-full w-full items-center justify-center gap-3">
-							<!-- search icon below -->
-							<button class="w-7">
-								<img alt="search" src={search} class="h-6 w-6" />
-							</button>
-
-							<input
-								class="h-full w-full text-nowrap text-base font-normal leading-normal text-gray-400 focus:border-transparent focus:outline-none focus:ring-0 focus:ring-transparent"
-								placeholder="Job tittle, keyword..."
-							/>
-						</div>
-
-						<!-- vertical line -->
-						<div class="h-px w-8 rotate-90 border border-zinc-200"></div>
-
-						<div class="flex h-full w-full items-center justify-center gap-3">
-							<!-- location icon below -->
-							<button class="w-7">
-								<img alt="search" src={map} class="h-6 w-6" />
-							</button>
-
-							<input
-								class="h-full w-full text-nowrap text-base font-normal leading-normal text-gray-400 focus:border-transparent focus:outline-none focus:ring-0 focus:ring-transparent"
-								placeholder="Your Location"
-							/>
-						</div>
+						<Search/>
 					</div>
 
 					<ActionButton buttonBg="blue-700" textColor="white" hoverColor="blue-400"

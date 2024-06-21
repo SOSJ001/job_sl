@@ -4,14 +4,15 @@
 	import Image_1 from '$lib/icon/USA_flag.png';
 	import sl_1 from '$lib/icon/sl 1.png';
 	import search from '$lib/icon/fi_search.png';
+	import logo from '$lib/icon/Logo.png';
 	import ActionButton from './ActionButton.svelte';
 </script>
 
 <div class="items-between flex w-full flex-col justify-between bg-white shadow-inner">
-	<div class="px-20 full inline-flex items-center justify-between bg-gray-100">
+	<div class="full inline-flex items-center justify-between bg-gray-100 px-20">
 		<div class="flex items-start justify-start gap-6">
 			<NavButton />
-			<NavButton location="/findjob">
+			<NavButton location="/Find_Job">
 				<span slot="text">Find Job</span>
 			</NavButton>
 			<NavButton location="/employers">
@@ -44,45 +45,50 @@
 			</div>
 		</div>
 	</div>
-	<div class="px-20 inline-flex w-full items-center justify-between gap-[25px] bg-white py-5">
+	<div class="inline-flex w-full items-center justify-between gap-[25px] bg-white px-20 py-5">
 		<!-- left -->
-		<div class="h-12 rounded border border-zinc-200 bg-white pl-5">
-			<div class="inline-flex w-[600px] h-full items-center justify-center gap-5">
-				<!-- left left -->
-				<div class="flex items-center justify-center gap-1">
-					<!-- country flag below -->
-					<img alt="flag" class="h-5 w-7 " src={sl_1} />
-					<select
-						class="inline-flex items-center justify-center gap-1 self-stretch border-0 bg-transparent focus:border-transparent focus:outline-none focus:ring-0 focus:ring-transparent"
-					>
-						<option selected class="text-nowrap text-sm font-normal leading-tight text-gray-500"
-							>Sierra Leone</option
+		<div class="flex gap-1">
+			<!-- logo  -->
+			<div><img src={logo} alt="jobsl_logo" /></div>
+			<div class="h-12 rounded border border-zinc-200 bg-white pl-5">
+				<div class="inline-flex h-full w-[600px] items-center justify-center gap-5">
+					<!-- left left -->
+					<div class="flex items-center justify-center gap-1">
+						<!-- country flag below -->
+						<img alt="flag" class="h-5 w-7" src={sl_1} />
+						<select
+							class="inline-flex items-center justify-center gap-1 self-stretch border-0 bg-transparent focus:border-transparent focus:outline-none focus:ring-0 focus:ring-transparent"
 						>
-					</select>
-				</div>
-				<!-- left vertical line -->
-				<div class="h-px w-8 rotate-90 border border-zinc-200"></div>
-				<!-- left- search -->
-				<div class="flex h-full w-full items-center justify-center gap-3">
-					<!-- search icon below -->
-					<button class="w-7">
-						<img alt="search" src={search} class="h-6 w-6" />
-					</button>
+							<option selected class="text-nowrap text-sm font-normal leading-tight text-gray-500"
+								>Sierra Leone</option
+							>
+						</select>
+					</div>
+					<!-- left vertical line -->
+					<div class="h-px w-8 rotate-90 border border-zinc-200"></div>
+					<!-- left- search -->
+					<div class="flex h-full w-full items-center justify-center gap-3">
+						<!-- search icon below -->
+						<button class="w-7">
+							<img alt="search" src={search} class="h-6 w-6" />
+						</button>
 
-					<input
-						class="h-full w-full text-nowrap text-base font-normal leading-normal text-gray-400 focus:border-transparent focus:outline-none focus:ring-0 focus:ring-transparent"
-						placeholder="Job tittle, keyword, company"
-					/>
+						<input
+							class="h-full w-full text-nowrap text-base font-normal leading-normal text-gray-400 focus:border-transparent focus:outline-none focus:ring-0 focus:ring-transparent"
+							placeholder="Job tittle, keyword, company"
+						/>
+					</div>
 				</div>
 			</div>
 		</div>
+
 		<!-- left ends -->
 		<!-- right -->
 		<div class="flex items-center justify-start gap-3">
 			<ActionButton textColor="blue-700" hoverColor="indigo-200" />
-      <ActionButton textColor="white" buttonBg="blue-700" hoverColor="blue-400">
-        <span slot="text">Post a Job</span>
-      </ActionButton>
+			<ActionButton textColor="white" buttonBg="blue-700" hoverColor="blue-400">
+				<span slot="text">Post a Job</span>
+			</ActionButton>
 		</div>
 		<!-- right ends -->
 	</div>
