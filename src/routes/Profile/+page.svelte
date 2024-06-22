@@ -16,7 +16,7 @@
 		<div class="flex w-full flex-col items-center justify-center">
 			<img src={Pp} alt="profile_pictue" class="h-52 w-56" />
 			<div class="flex flex-col items-center justify-center text-2xl">
-				<span class="">Musa Conteh</span>
+				<span class="text-blue-700 font-bold">Musa Conteh</span>
 				<span>Software Engineer and Multimedia Specialist</span>
 			</div>
 		</div>
