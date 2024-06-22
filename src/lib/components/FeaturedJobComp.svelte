@@ -6,7 +6,7 @@
 </script>
 
 <div
-	class="inline-flex w- flex-col items-start justify-start gap-5 rounded-lg border border-zinc-200 bg-{bg} p-6 shadow"
+	class="inline-flex w-full flex-col items-start justify-start gap-5 rounded-lg border border-zinc-200 bg-{bg} p-6 shadow"
 >
 	<!-- first row -->
 	<div class="flex h-14 flex-col items-start justify-start gap-1.5 self-stretch">
