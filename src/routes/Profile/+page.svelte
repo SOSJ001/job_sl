@@ -45,7 +45,7 @@
 		</div>
 	</div>
 	<!-- 2nd col  -->
-	<div class="h-full w-1/2 space-y-5">
+	<div class="h-full w-1/2 space-y-4">
 		<BasicInfo />
 		<Experience />
 		<Accordion />
