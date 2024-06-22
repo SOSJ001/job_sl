@@ -15,16 +15,16 @@
 			<NavButton location="/Find_Job">
 				<span slot="text">Find Job</span>
 			</NavButton>
-			<NavButton location="/employers">
+			<NavButton location="/">
 				<span slot="text">Employers</span>
 			</NavButton>
-			<NavButton location="candidates">
-				<span slot="text">Candidates</span>
+			<NavButton location="/">
+				<span slot="text">Dashboard</span>
 			</NavButton>
-			<NavButton location="pricingPlans">
-				<span slot="text">Pricing Plans</span>
+			<NavButton location="/Profile">
+				<span slot="text">Profile</span>
 			</NavButton>
-			<NavButton location="customerSupport">
+			<NavButton location="/">
 				<span slot="text">Customer Supports</span>
 			</NavButton>
 		</div>
