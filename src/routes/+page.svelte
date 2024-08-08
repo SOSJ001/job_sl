@@ -13,7 +13,7 @@ import Nav from '$lib/components/Navigation.svelte'
 </script>
 <div>
     <Nav/>
-    <Hero/>
+    <Hero/> 
     <PopularVacancies/>
     <WorkingProcess/>
     <PopularCategories/>

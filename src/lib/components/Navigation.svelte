@@ -18,7 +18,7 @@
 			<NavButton location="/">
 				<span slot="text">Employers</span>
 			</NavButton>
-			<NavButton location="/">
+			<NavButton location="/Dashboard">
 				<span slot="text">Dashboard</span>
 			</NavButton>
 			<NavButton location="/Profile">

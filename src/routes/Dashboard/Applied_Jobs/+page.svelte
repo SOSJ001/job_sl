@@ -1,0 +1,3 @@
+<div>
+    Applied jobs
+</div>

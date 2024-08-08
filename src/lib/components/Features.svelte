@@ -2,8 +2,10 @@
 <script lang="ts">
     import briefcase from "$lib/icon/briefcase-duotone.png"
     export let iconBg: String = ""
+	export let width: String = "1/4"
+	export let bg:String = "white"
 </script>
-<div class="w-1/4 flex items-center justify-start gap-5 rounded-lg bg-white p-3 shadow-lg">
+<div class="w-{width} flex items-center justify-start gap-5 rounded-lg bg-{bg} p-3 shadow-lg">
 	<!-- icon below -->
 	<div class="flex items-start justify-start gap-2.5 rounded bg-{iconBg!==""?iconBg:"sky-100"} p-3">
 		<slot name="icon">
