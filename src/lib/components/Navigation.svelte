@@ -85,7 +85,9 @@
 		<!-- left ends -->
 		<!-- right -->
 		<div class="flex items-center justify-start gap-3">
-			<ActionButton textColor="blue-700" hoverColor="indigo-200" />
+			<a href="/Log_In">
+				<ActionButton textColor="blue-700" hoverColor="indigo-200" />
+			</a>
 			<ActionButton textColor="white" buttonBg="blue-700" hoverColor="blue-400">
 				<span slot="text">Post a Job</span>
 			</ActionButton>
