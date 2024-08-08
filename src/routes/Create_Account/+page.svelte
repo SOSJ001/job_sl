@@ -46,13 +46,13 @@
 						class="h-full w-full text-nowrap rounded-sm border-gray-300 text-base font-normal leading-normal text-gray-400 focus:border-transparent focus:outline-none focus:ring-0 focus:ring-transparent"
 						placeholder="Confirm Password"
 					/>
-					<div class="item flex flex-row justify-between">
+					<!-- <div class="item flex flex-row justify-between">
 						<div>
 							<input type="checkbox" name="rememberMe" id="rememberMe" />
 							<label for="rememberMe">Remember Me</label>
 						</div>
 						<a href="/" class="font-semibold text-blue-700">Forget password</a>
-					</div>
+					</div> -->
 					<ActionButton
 						hoverColor="blue-400"
 						width="full"
@@ -101,13 +101,13 @@
 						class="h-full w-full text-nowrap rounded-sm border-gray-300 text-base font-normal leading-normal text-gray-400 focus:border-transparent focus:outline-none focus:ring-0 focus:ring-transparent"
 						placeholder="Confirm Password"
 					/>
-					<div class="item flex flex-row justify-between">
+					<!-- <div class="item flex flex-row justify-between">
 						<div>
 							<input type="checkbox" name="rememberMe" id="rememberMe" />
 							<label for="rememberMe">Remember Me</label>
 						</div>
 						<a href="/" class="font-semibold text-blue-700">Forget password</a>
-					</div>
+					</div> -->
 					<ActionButton
 						hoverColor="blue-400"
 						width="full"
