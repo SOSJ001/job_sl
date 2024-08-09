@@ -29,9 +29,7 @@
 	<!-- second row -->
 	<div class="justify-between inline-flex w-full items-center gap-3">
 		<div class="flex gap-3">
-			<div class="h-14 w-14">
-				<slot name="companylogo"><img alt="company_logo" class="w-14" src={orange} /></slot>
-			</div>
+			
 			<div class="inline-flex flex-col items-start justify-start gap-1">
 				<div class="self-stretch text-base font-medium leading-normal text-zinc-900">
 					<slot name="company name">Orange SL</slot>
