@@ -16,20 +16,30 @@
 			</span>
 			<span>
 				<NavButton location="/Dashboard/Applied_Jobs">
-                    <span slot="text">Applied Jobs</span>
+                    <span slot="text">Employers Profile</span>
                 </NavButton>
 			</span>
             <span>
 				<NavButton location="/Dashboard/Favourite_Jobs">
-                    <span slot="text">Favourite Jobs</span>
+                    <span slot="text">Post a Job</span>
                 </NavButton>
 			</span>
             <span>
 				<NavButton location="/Dashboard/Job_Alert">
-                    <span slot="text">Job Alert</span>
+                    <span slot="text">Saved Candidates</span>
                 </NavButton>
 			</span>
             <span>
+				<NavButton location="/Dashboard/Settings">
+                    <span slot="text">Plans & Billing</span>
+                </NavButton>
+			</span>
+			 <span>
+				<NavButton location="/Dashboard/Settings">
+                    <span slot="text">All Companies</span>
+                </NavButton>
+			</span>
+			<span>
 				<NavButton location="/Dashboard/Settings">
                     <span slot="text">Settings</span>
                 </NavButton>

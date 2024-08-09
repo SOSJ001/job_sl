@@ -35,9 +35,9 @@
 						<Search/>
 					</div>
 
-					<ActionButton buttonBg="blue-700" textColor="white" hoverColor="blue-400"
+					<a href="Find_Job"><ActionButton buttonBg="blue-700" textColor="white" hoverColor="blue-400"
 						><span slot="text">Find Job</span></ActionButton
-					>
+					></a>
 				</div>
 
 				<div class="inline-flex items-start justify-start gap-1">
