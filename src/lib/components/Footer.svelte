@@ -9,7 +9,7 @@
 		<div class="inline-flex flex-col items-start justify-start gap-6">
 			<div class="inline-flex items-center justify-start gap-2">
 				<div class="relative h-10 w-10"></div>
-				<div class=" text-2xl font-semibold leading-10 text-white">Jobpilot</div>
+				<div class=" text-2xl font-semibold leading-10 text-white">JobSL</div>
 			</div>
 			<div class="flex flex-col items-start justify-start gap-3">
 				<div class="inline-flex items-start justify-start">
