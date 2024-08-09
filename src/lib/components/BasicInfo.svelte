@@ -23,7 +23,7 @@
 				</div>
 				<div class="text-center">
 					<div class="text-neutral-700">Email</div>
-					<div>musaconteh2004@gmail.com</div>
+					<div>michaelsosj@gmail.com</div>
 				</div>
 			</div>
 			<div>
