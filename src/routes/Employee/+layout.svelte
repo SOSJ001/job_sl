@@ -10,37 +10,37 @@
 		<div class="flex w-[300px] flex-col gap-3 pl-5">
 			<span class="font-mono text-sm text-gray-500">EMPLOYEE DASHBOARD</span>
 			<span>
-				<NavButton location="/Dashboard">
+				<NavButton location="/Employee">
                     <span slot="text">Overview</span>
                 </NavButton>
 			</span>
 			<span>
-				<NavButton location="/Dashboard/Applied_Jobs">
+				<NavButton location="/Employee/Applied_Jobs">
                     <span slot="text">Employers Profile</span>
                 </NavButton>
 			</span>
             <span>
-				<NavButton location="/Dashboard/Favourite_Jobs">
+				<NavButton location="/Employee/Favourite_Jobs">
                     <span slot="text">Post a Job</span>
                 </NavButton>
 			</span>
             <span>
-				<NavButton location="/Dashboard/Job_Alert">
+				<NavButton location="/Employee/Job_Alert">
                     <span slot="text">Saved Candidates</span>
                 </NavButton>
 			</span>
             <span>
-				<NavButton location="/Dashboard/Settings">
+				<NavButton location="/Employee/Settings">
                     <span slot="text">Plans & Billing</span>
                 </NavButton>
 			</span>
 			 <span>
-				<NavButton location="/Dashboard/Settings">
+				<NavButton location="/DasEmployeehboard/Settings">
                     <span slot="text">All Companies</span>
                 </NavButton>
 			</span>
 			<span>
-				<NavButton location="/Dashboard/Settings">
+				<NavButton location="/Employee/Settings">
                     <span slot="text">Settings</span>
                 </NavButton>
 			</span>

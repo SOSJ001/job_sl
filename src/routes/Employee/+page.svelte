@@ -6,7 +6,7 @@
 </script>
 
 <div class="w-full space-y-3">
-	<div class="text-xl font-bold">Hello, Instagram</div>
+	<div class="text-xl font-bold">Hello, Orange</div>
 	<div class="text-sm capitalize text-gray-500">here is your daily activities and application</div>
 	<div class="flex w-full flex-row justify-start px-11 gap-7">
 		<Features width="[200px]" bg="gray-100">
