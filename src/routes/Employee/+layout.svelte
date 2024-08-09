@@ -15,27 +15,27 @@
                 </NavButton>
 			</span>
 			<span>
-				<NavButton location="/Employee/Applied_Jobs">
+				<NavButton location="/Employee/Profile">
                     <span slot="text">Employers Profile</span>
                 </NavButton>
 			</span>
             <span>
-				<NavButton location="/Employee/Favourite_Jobs">
+				<NavButton location="/Employee/Post_A_Job">
                     <span slot="text">Post a Job</span>
                 </NavButton>
 			</span>
             <span>
-				<NavButton location="/Employee/Job_Alert">
+				<NavButton location="/Employee/Saved_Candidates">
                     <span slot="text">Saved Candidates</span>
                 </NavButton>
 			</span>
             <span>
-				<NavButton location="/Employee/Settings">
+				<NavButton location="/Employee/Plans_Billings">
                     <span slot="text">Plans & Billing</span>
                 </NavButton>
 			</span>
 			 <span>
-				<NavButton location="/DasEmployeehboard/Settings">
+				<NavButton location="/Employee/All_Companies">
                     <span slot="text">All Companies</span>
                 </NavButton>
 			</span>
