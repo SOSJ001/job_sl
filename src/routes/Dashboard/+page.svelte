@@ -50,7 +50,7 @@
 		</div>
 	</div>
 	<!-- table body  -->
-	<div class=" shadowgrid grid-cols-2 items-center justify-between text-center font-mono">
+	<div class=" shadow grid grid-cols-2 items-center justify-between text-center font-mono">
 		<div class="flex flex-row gap-2">
 			<div>
 				<div class="h-14 w-14">
