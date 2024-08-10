@@ -20,21 +20,46 @@
 	let last_name;
 	let email;
 	let password;
-	let confirmPassword
-	$: role  = candidate?"candidate":"employer";
-	let sign_up = async() => {
-		password.value
-		alert(role);
-		// const response = await fetch('/Create_Account/Sign_up_Api', {
-		// 	method: 'POST',
-		// 	body: JSON.stringify({ first_name, last_name, email, password, role }),
-		// 	headers: {
-		// 		'Content-Type': 'application/json'
-		// 	}
-		// });
+	let confirmPassword;
+	$: role = candidate ? 'candidate' : 'employer';
+	let sign_up = async () => {
+		let first = first_name.value;
+		let last = last_name.value;
+		let mail = email.value;
+		let passcode = password.value;
 
-		// //destructing the response object
-		// const { supabaseError, supabaseSession, cookieVariable } = await response.json(); //wait for the responso from the server
+		if (
+			password.value === '' ||
+			first_name.value === '' ||
+			last_name.value === '' ||
+			email.value === '' ||
+			confirmPassword.value === ''
+		) {
+			alert('Please Complete all details');
+			return;
+		}
+		if (password.value.length < 6) {
+			alert('Password must be above 6 characters');
+			return;
+		}
+		if (password.value !== confirmPassword.value) {
+			alert('Password not matched');
+			return;
+		}
+		// alert(role);
+		const response = await fetch('/Create_Account/Sign_up_Api', {
+			method: 'POST',
+			body: JSON.stringify({ first, last, mail, passcode, role }),
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		});
+
+		//destructing the response object
+		const { supabaseError, supabaseSession, cookieVariable } = await response.json(); //wait for the responso from the server
+
+		//trying to navigate to the appropriate dashboard
+		console.log('this is the cookie variable', supabaseSession);
 	};
 </script>
 
@@ -58,46 +83,50 @@
 				<!-- email input field -->
 				<!-- <Input id="email" type="email" placeholder="name@flowbite.com"/> -->
 				<div class=" flex flex-row gap-3">
-					<input bind:this = {first_name}
+					<input
+						bind:this={first_name}
 						type="text"
 						class="h-full w-full text-nowrap rounded-sm border-gray-300 text-base font-normal leading-normal text-gray-400 focus:border-transparent focus:outline-none focus:ring-0 focus:ring-transparent"
 						placeholder="Michael"
 					/>
-					<input bind:this={last_name}
+					<input
+						bind:this={last_name}
 						type="text"
 						class="h-full w-full text-nowrap rounded-sm border-gray-300 text-base font-normal leading-normal text-gray-400 focus:border-transparent focus:outline-none focus:ring-0 focus:ring-transparent"
 						placeholder="Johnson"
 					/>
 				</div>
-				<input bind:this={email}
+				<input
+					bind:this={email}
 					type="email"
 					class="h-full w-full text-nowrap rounded-sm border-gray-300 text-base font-normal leading-normal text-gray-400 focus:border-transparent focus:outline-none focus:ring-0 focus:ring-transparent"
 					placeholder="michaelsosj@gmail.com"
 				/>
 
 				<!-- password input field -->
-				<input bind:this={password}
+				<input
+					bind:this={password}
 					type="password"
 					class="h-full w-full text-nowrap rounded-sm border-gray-300 text-base font-normal leading-normal text-gray-400 focus:border-transparent focus:outline-none focus:ring-0 focus:ring-transparent"
 					placeholder="Password"
 				/>
-				<input bind:this={confirmPassword}
+				<input
+					bind:this={confirmPassword}
 					type="password"
 					class="h-full w-full text-nowrap rounded-sm border-gray-300 text-base font-normal leading-normal text-gray-400 focus:border-transparent focus:outline-none focus:ring-0 focus:ring-transparent"
 					placeholder="Confirm Password"
 				/>
 				<button class="w-full" on:click={sign_up}>
 					<ActionButton
-					hoverColor="blue-400"
-					width="full"
-					textColor="white"
-					buttonBg="blue-700"
-					buttonborder="blue-700"
-				>
-					<span slot="text"> Sign Up</span>
-				</ActionButton>
+						hoverColor="blue-400"
+						width="full"
+						textColor="white"
+						buttonBg="blue-700"
+						buttonborder="blue-700"
+					>
+						<span slot="text"> Sign Up</span>
+					</ActionButton>
 				</button>
-				
 			</form>
 		</div>
 	</div>

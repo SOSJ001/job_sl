@@ -5,15 +5,9 @@ import { json } from '@sveltejs/kit';
 
 // @ts-ignore
 export async function POST({ request, cookies }) {
-	const {
-		first_name,
-		last_name,
-		email,
-        password,
-        role
-	} = await request.json();
+	const { first, last, mail, passcode, role } = await request.json();
 
-    const { SessionFromdb } = await signup(first_name, last_name, email, password, role)
+    const { SessionFromdb } = await signup(first, last, mail, passcode, role);
     let supabaseError = SessionFromdb.error;
 	let supabaseSession = SessionFromdb.data.session;
 	if (SessionFromdb.error !== null) {
