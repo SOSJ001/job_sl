@@ -23,6 +23,7 @@
 	let confirmPassword
 	$: role  = candidate?"candidate":"employer";
 	let sign_up = async() => {
+		password.value
 		alert(role);
 		// const response = await fetch('/Create_Account/Sign_up_Api', {
 		// 	method: 'POST',
@@ -50,7 +51,7 @@
 	<div>
 		<div class="justify flex flex-col gap-7 p-5 md:w-[500px]">
 			<span class="font-mono text-2xl font-bold"
-				>Create account as a {candidate ? 'Candidate' : 'Employer'}</span
+				>Create account as {candidate ? 'a Candidate' : 'an Employer'}</span
 			>
 			<span>Aready have an account? <a href="Log_In" class="text-blue-700">Log In</a></span>
 			<form action="" class=" space-y-5">
