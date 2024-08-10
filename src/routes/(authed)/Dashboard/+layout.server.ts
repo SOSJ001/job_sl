@@ -1,0 +1,1 @@
+//redirect to the home page if not logged in

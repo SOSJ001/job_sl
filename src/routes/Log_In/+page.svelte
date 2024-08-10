@@ -1,13 +1,40 @@
 <script>
 	// @ts-nocheck
-
+	import { goto } from '$app/navigation';
 	import ActionButton from '$lib/components/ActionButton.svelte';
-	import { Input } from 'flowbite-svelte';
+	let email //login email
+	let password; //login password
+	let signinFunction = async() => {
+		// alert("email is: "+ email.value + " password is: "+ password.value)
+		const response = await fetch('/Log_In/Login_Api', {
+			method: 'POST',
+			body: JSON.stringify({ email, pass }),
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		});
+
+		//destructing the response object
+		const { supabaseError, supabaseSession, cookieVariable } = await response.json(); //wait for the responso from the server
+	};
 </script>
 
 <div class="flex h-screen w-full flex-row items-center justify-center overflow-hidden">
 	<div class="justify flex flex-col gap-7 p-5 md:w-[500px]">
-		<span class="text-2xl font-bold font-mono">Sign In</span>
+		<div class="flex flex-row justify-between">
+			<span class="font-mono text-2xl font-bold">Sign In</span>
+			<a href="/">
+				<ActionButton
+					hoverColor="blue-400"
+					textColor="white"
+					buttonBg="blue-700"
+					buttonborder="blue-700"
+				>
+					<span slot="text"> Back</span>
+				</ActionButton></a
+			>
+		</div>
+
 		<span
 			>Aready have an account? <a href="Create_Account" class="text-blue-700">Create an account</a
 			></span
@@ -15,14 +42,14 @@
 		<form action="" class=" space-y-5">
 			<!-- email input field -->
 			<!-- <Input id="email" type="email" placeholder="name@flowbite.com"/> -->
-			<input
+			<input bind:this={email}
 				type="email"
 				class="h-full w-full text-nowrap rounded-sm border-gray-300 text-base font-normal leading-normal text-gray-400 focus:border-transparent focus:outline-none focus:ring-0 focus:ring-transparent"
 				placeholder="michaelsosj@gmail.com"
 			/>
 
 			<!-- password input field -->
-			<input
+			<input bind:this={password}
 				type="password"
 				class="h-full w-full text-nowrap rounded-sm border-gray-300 text-base font-normal leading-normal text-gray-400 focus:border-transparent focus:outline-none focus:ring-0 focus:ring-transparent"
 				placeholder="*********"
@@ -34,15 +61,17 @@
 				</div>
 				<a href="/Forget_Password" class="font-semibold text-blue-700">Forget password</a>
 			</div>
-			<ActionButton
-				hoverColor="blue-400"
-				width="full"
-				textColor="white"
-				buttonBg="blue-700"
-				buttonborder="blue-700"
-			>
-				<span slot="name"> Sign In</span>
-			</ActionButton>
+			<button on:click={signinFunction} class="w-full">
+				<ActionButton
+					hoverColor="blue-400"
+					width="full"
+					textColor="white"
+					buttonBg="blue-700"
+					buttonborder="blue-700"
+				>
+					<span slot="text"> Sign In</span>
+				</ActionButton>
+			</button>
 		</form>
 	</div>
 </div>
