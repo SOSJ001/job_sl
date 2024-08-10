@@ -8,7 +8,7 @@
 		// alert("email is: "+ email.value + " password is: "+ password.value)
 		const response = await fetch('/Log_In/Login_Api', {
 			method: 'POST',
-			body: JSON.stringify({ email, pass }),
+			body: JSON.stringify({ email, password }),
 			headers: {
 				'Content-Type': 'application/json'
 			}
