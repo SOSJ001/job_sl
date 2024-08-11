@@ -4,7 +4,10 @@ import { cookieUserId } from '$lib/supabase/store.js';
 import { redirect } from '@sveltejs/kit';
 
 export function load({ cookies }) {
-    let cookievar1 = cookies.get('userSession');
-    console.log(cookievar1);
+    let cookievar1 : any  = cookies.get('userSession');
+    if (cookievar1 === undefined || cookievar1 === null) {
+        cookievar1 = null
+        return { cookievar1 }; 
+    }
 	return { cookievar1 };
 }
