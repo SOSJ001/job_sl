@@ -1,13 +1,12 @@
 // handle login request to superbase
-
 import { signin } from "$lib/supabase/store.js";
 import { json } from "@sveltejs/kit";
 
 // @ts-ignore 
 export async function POST({ request, cookies }) {
-    const { email, password } = await request.json();
+    const { mail, passcode } = await request.json();
 
-    const { SessionFromdb } = await signin(email, password);
+    const { SessionFromdb } = await signin(mail, passcode);
     let supabaseError = SessionFromdb.error;
     let supabaseSession = SessionFromdb.data.session;
     if (SessionFromdb.error !== null) {
@@ -19,8 +18,8 @@ export async function POST({ request, cookies }) {
         // if ther is no error on login or the login is complete do this 
         supabaseError = null;
         // @ts-ignore 
-        cookies.set('userSession', supabaseSession?.user.id, { path: '/' });
-        const cookieVariable = supabaseSession?.user.id;
+        cookies.set('userSession', supabaseSession?.user.id, { path: '/' }); //set the cookie
+        const cookieVariable: any = supabaseSession?.user.id;
         return json({ supabaseSession, supabaseError, cookieVariable }, { status: 201 });
     }
 

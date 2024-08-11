@@ -3,6 +3,7 @@
 	import { Tabs, TabItem } from 'flowbite-svelte';
 	import ActionButton from '$lib/components/ActionButton.svelte';
 	import { Input } from 'flowbite-svelte';
+	import { goto } from "$app/navigation";
 	$: candidate = true;
 	$: employer = false;
 	let activebg: String = 'border-2 border-blue-400'; //active styling for employer or candidate
@@ -21,7 +22,7 @@
 	let email;
 	let password;
 	let confirmPassword;
-	$: role = candidate ? 'candidate' : 'employer';
+	$: role = candidate ? 'Candidate' : 'Employer';
 	let sign_up = async () => {
 		let first = first_name.value;
 		let last = last_name.value;
@@ -58,8 +59,9 @@
 		//destructing the response object
 		const { supabaseError, supabaseSession, cookieVariable } = await response.json(); //wait for the responso from the server
 
-		//trying to navigate to the appropriate dashboard
-		console.log('this is the cookie variable', supabaseSession);
+		//trying to navigate to the appropriate url		
+		alert("Sign Up Completed...Redirecting to Login");
+		goto("/Log_In");
 	};
 </script>
 

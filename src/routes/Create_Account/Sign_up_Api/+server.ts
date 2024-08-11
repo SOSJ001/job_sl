@@ -18,7 +18,7 @@ export async function POST({ request, cookies }) {
 		// if ther is no error on login or the login is complete do this
 		supabaseError = null;
 		// @ts-ignore
-		cookies.set('userSession', supabaseSession?.user.id, { path: '/' });
+		// cookies.set('userSession', supabaseSession?.user.id, { path: '/' });
 		const cookieVariable = supabaseSession?.user.id;
 		return json({ supabaseSession, supabaseError, cookieVariable }, { status: 201 });
 	}

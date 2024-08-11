@@ -1,7 +1,9 @@
+import { writable } from 'svelte/store';
 import { supabase } from './connection';
-
+export let cookieUserId = writable(null);
+export let url_path = writable(null);
 export async function signin(email: string, password: string) {
-	const { data, error } = await supabase.auth.signUp({
+	const { data, error } = await supabase.auth.signInWithPassword({
 		email,
 		password
 	});
@@ -37,4 +39,11 @@ export async function signup(
 			error
 		}
 	};
+}
+
+export async function getUser() {
+	const { data, error } = await supabase.auth.getUser();
+	return {
+			data,
+			error};
 }

@@ -1,4 +1,4 @@
-<script>
+<script>import {url_path} from '$lib/supabase/store'
     import Hero from '$lib/components/Hero.svelte';
 import Nav from '$lib/components/Navigation.svelte'
 	import PopularCategories from '$lib/components/PopularCategories.svelte';
@@ -9,7 +9,6 @@ import Nav from '$lib/components/Navigation.svelte'
 	import Testimonials from '$lib/components/Testimonials.svelte';
 	import CallToAction from '$lib/components/CallToAction.svelte';
 	import Footer from '$lib/components/Footer.svelte';
-
 </script>
 <div>
     <Nav/>

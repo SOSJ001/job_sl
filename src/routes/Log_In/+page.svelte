@@ -2,13 +2,18 @@
 	// @ts-nocheck
 	import { goto } from '$app/navigation';
 	import ActionButton from '$lib/components/ActionButton.svelte';
+	import {url_path} from '$lib/supabase/store'
+	import {cookieUserId} from '$lib/supabase/store'
+
 	let email //login email
 	let password; //login password
 	let signinFunction = async() => {
+		let mail = email.value
+		let passcode = password.value
 		// alert("email is: "+ email.value + " password is: "+ password.value)
 		const response = await fetch('/Log_In/Login_Api', {
 			method: 'POST',
-			body: JSON.stringify({ email, password }),
+			body: JSON.stringify({ mail, passcode }),
 			headers: {
 				'Content-Type': 'application/json'
 			}
@@ -16,6 +21,10 @@
 
 		//destructing the response object
 		const { supabaseError, supabaseSession, cookieVariable } = await response.json(); //wait for the responso from the server
+		// console.log('this is the cookie variable', supabaseSession);
+		$cookieUserId = cookieVariable
+		$url_path = supabaseSession.user.user_metadata.role;
+		goto(`/Dashboard/${$url_path}`)
 	};
 </script>
 

@@ -6,6 +6,8 @@
 	import search from '$lib/icon/fi_search.png';
 	import logo from '$lib/icon/Logo.png';
 	import ActionButton from './ActionButton.svelte';
+	import { cookieUserId } from '$lib/supabase/store';
+	import {url_path} from "$lib/supabase/store"
 </script>
 
 <div class="items-between flex w-full flex-col justify-between bg-white shadow-inner">
@@ -18,12 +20,15 @@
 			<NavButton location="/">
 				<span slot="text">Employers</span>
 			</NavButton>
-			<NavButton location="/Dashboard">
-				<span slot="text">Dashboard</span>
-			</NavButton>
-			<NavButton location="/Profile">
-				<span slot="text">Profile</span>
-			</NavButton>
+			{#if $cookieUserId !== null }
+				<NavButton location="/Dashboard/{$url_path}">
+					<span slot="text">Dashboard</span>
+				</NavButton>
+
+				<NavButton location="/Profile">
+					<span slot="text">Profile</span>
+				</NavButton>
+			{/if}
 			<NavButton location="/">
 				<span slot="text">Customer Supports</span>
 			</NavButton>
