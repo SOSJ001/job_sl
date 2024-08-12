@@ -8,6 +8,23 @@
 	import ActionButton from './ActionButton.svelte';
 	import { cookieUserId } from '$lib/supabase/store';
 	import { url_path } from '$lib/supabase/store';
+	// import {signOut} from '$lib/supabase/store';
+	let signOutFunction = async () => {
+		const response = await fetch('/Sign_Out_Api', {
+			method: 'POST',
+			body: JSON.stringify({}),
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		});
+		const { success } = await response.json();
+		if (success) {
+			$cookieUserId = null;
+			$url_path = null;
+		} else {
+			alert('error signing out');
+		}
+	};
 </script>
 
 <div class="items-between flex w-full flex-col justify-between bg-white shadow-inner">
@@ -90,26 +107,27 @@
 		<!-- left ends -->
 		<!-- right -->
 		<div class="flex items-center justify-start gap-3">
-			{#if $cookieUserId === "Employer" && $cookieUserId !== null }
+			{#if $cookieUserId === 'Employer' && $cookieUserId !== null}
 				<ActionButton textColor="white" buttonBg="blue-700" hoverColor="blue-400">
-				<span slot="text">Post a Job</span>
-			</ActionButton>
+					<span slot="text">Post a Job</span>
+				</ActionButton>
 			{/if}
-			
+
 			{#if $cookieUserId !== null}
-				<button on:click={() => alert('Sign Out not functional now!')}>
+				<button on:click={signOutFunction}>
 					<ActionButton textColor="blue-700" hoverColor="indigo-200">
 						<span slot="text">Sign Out</span>
 					</ActionButton>
 				</button>
 			{:else}
+				<a href="/Create_Account">
+					<ActionButton textColor="white" buttonBg="blue-700" hoverColor="blue-400">
+						<span slot="text">Sign up</span>
+					</ActionButton>
+				</a>
 				<a href="/Log_In">
 					<ActionButton textColor="blue-700" hoverColor="indigo-200" />
 				</a>
-
-				<ActionButton textColor="white" buttonBg="blue-700" hoverColor="blue-400">
-				<span slot="text">Sign up</span>
-			</ActionButton>
 			{/if}
 		</div>
 		<!-- right ends -->

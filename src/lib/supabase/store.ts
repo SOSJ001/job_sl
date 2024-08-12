@@ -44,6 +44,12 @@ export async function signup(
 export async function getUser() {
 	const { data, error } = await supabase.auth.getUser();
 	return {
-			data,
-			error};
+		data,
+		error
+	};
+}
+
+export async function signOut() {
+	const { error } = await supabase.auth.signOut();
+	return error
 }
