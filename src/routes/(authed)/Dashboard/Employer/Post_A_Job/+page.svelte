@@ -1,5 +1,7 @@
 <script lang="ts">
+	//@ts-nocheck
 	import ActionButton from '$lib/components/ActionButton.svelte';
+	import { insertIntoJobTable } from '$lib/supabase/store';
 	let jobTitle;
 	let jobTags;
 	let jobRole;
@@ -10,8 +12,52 @@
 	let jobType;
 	let country;
 	let city;
+	let isChecked = false;
+	let remote: any;
 	let jobBenefit;
 	let jobDescription;
+	$: {
+		if (isChecked) {
+			remote = 'Fully Remote';
+		} else {
+			remote = null;
+		}
+	}
+	let insertJobFunction = async() => {
+		    let insertError = await insertIntoJobTable(
+			jobTitle.value,
+			jobTags.value,
+			jobRole.value,
+			minimumSalary.value,
+			maximumSalary.value,
+			education.value,
+			experience.value,
+			jobType.value,
+			country.value,
+			city.value,
+			remote,
+			jobBenefit.value,
+			jobDescription.value
+		);
+		if(insertError === null){
+			alert("Job Successfuly Inserted, Navigate to 'My Jobs' to see jobs")
+			jobTitle.value = ""
+			jobTags.value = ""
+			jobRole.value = ""
+			minimumSalary.value = ""
+			maximumSalary.value = ""
+			education.value = ""
+			experience.value = ""
+			jobType.value = ""
+			country.value = ""
+			city.value = ""
+			isChecked = false
+			jobBenefit.value = ""
+			jobDescription.value = ""
+		}else{
+			console.log(" this is the insert error \n", insertError)
+		}
+	};
 </script>
 
 <div class="space-y-3">
@@ -101,10 +147,9 @@
 		/>
 		<div>
 			<input
-				bind:this={city}
+				bind:checked={isChecked}
 				type="checkbox"
 				class="text-nowrap rounded-sm border-blue-300 text-base font-normal leading-normal text-gray-400 focus:border-blue-300 focus:outline-none focus:ring-0 focus:ring-transparent"
-				placeholder="City"
 			/>
 			<label class="capitalize text-gray-500" for="">fully Remote Position</label>
 		</div>
@@ -127,7 +172,9 @@
 			placeholder="Job Description"
 		/>
 	</div>
-	<ActionButton buttonBg="blue-700" textColor="white" hoverColor="blue-400">
-		<span slot="text">Post Job</span>
-	</ActionButton>
+	<button on:click={insertJobFunction}>
+		<ActionButton buttonBg="blue-700" textColor="white" hoverColor="blue-400">
+			<span slot="text">Post Job</span>
+		</ActionButton>
+	</button>
 </div>

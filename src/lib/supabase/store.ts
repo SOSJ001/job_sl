@@ -51,5 +51,38 @@ export async function getUser() {
 
 export async function signOut() {
 	const { error } = await supabase.auth.signOut();
+	return error;
+}
+
+export async function insertIntoJobTable(
+	jobTitle: string,
+	jobTags: string,
+	jobRole: string,
+	minimumSalary: string,
+	maximumSalary: string,
+	education: string,
+	experience: string,
+	jobType: string,
+	country: string,
+	city: string,
+	remote:string,
+	jobBenefit: string,
+	jobDescription: string
+) {
+	const { error } = await supabase.from('jobTable').insert({
+		jobTitle: jobTitle,
+		jobTags: jobTags,
+		jobRole: jobRole,
+		minSalary: minimumSalary,
+		maxSalary: maximumSalary,
+		education: education,
+		experience: experience,
+		jobType: jobType,
+		country: country,
+		city: city,
+		remote: remote,
+		jobBenefit: jobBenefit,
+		jobDescription: jobDescription
+	});
 	return error
 }

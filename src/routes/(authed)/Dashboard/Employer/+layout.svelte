@@ -24,6 +24,11 @@
                     <span slot="text">Post a Job</span>
                 </NavButton>
 			</span>
+			<span>
+				<NavButton location="/Dashboard/Employer/My_Jobs">
+                    <span slot="text">My Jobs</span>
+                </NavButton>
+			</span>
             <span>
 				<NavButton location="/Dashboard/Employer/Saved_Candidates">
                     <span slot="text">Saved Candidates</span>
