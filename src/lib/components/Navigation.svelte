@@ -8,6 +8,7 @@
 	import ActionButton from './ActionButton.svelte';
 	import { cookieUserId } from '$lib/supabase/store';
 	import { url_path } from '$lib/supabase/store';
+	import { goto } from '$app/navigation';
 	// import {signOut} from '$lib/supabase/store';
 	let signOutFunction = async () => {
 		const response = await fetch('/Sign_Out_Api', {
@@ -21,6 +22,7 @@
 		if (success) {
 			$cookieUserId = null;
 			$url_path = null;
+			goto("/")
 		} else {
 			alert('error signing out');
 		}
