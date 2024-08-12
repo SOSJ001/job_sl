@@ -7,7 +7,7 @@
 	import logo from '$lib/icon/Logo.png';
 	import ActionButton from './ActionButton.svelte';
 	import { cookieUserId } from '$lib/supabase/store';
-	import {url_path} from "$lib/supabase/store"
+	import { url_path } from '$lib/supabase/store';
 </script>
 
 <div class="items-between flex w-full flex-col justify-between bg-white shadow-inner">
@@ -20,7 +20,7 @@
 			<NavButton location="/">
 				<span slot="text">Employers</span>
 			</NavButton>
-			{#if $cookieUserId !== null }
+			{#if $cookieUserId !== null}
 				<NavButton location="/Dashboard/{$url_path}">
 					<span slot="text">Dashboard</span>
 				</NavButton>
@@ -90,21 +90,19 @@
 		<!-- left ends -->
 		<!-- right -->
 		<div class="flex items-center justify-start gap-3">
-			{#if cookieUserId === null}
-				<a href="/Log_In">
-				<ActionButton textColor="blue-700" hoverColor="indigo-200" />
-			</a>
-			{/if}
-			
 			<ActionButton textColor="white" buttonBg="blue-700" hoverColor="blue-400">
 				<span slot="text">Post a Job</span>
 			</ActionButton>
-			{#if cookieUserId !== null}
-				<button on:click={()=> alert("Sign Out not functional now!")}>
-				<ActionButton textColor="blue-700" hoverColor="indigo-200" >
-					<span slot="text">Sign Out</span>
-				</ActionButton>
-			</button>
+			{#if $cookieUserId !== null}
+				<button on:click={() => alert('Sign Out not functional now!')}>
+					<ActionButton textColor="blue-700" hoverColor="indigo-200">
+						<span slot="text">Sign Out</span>
+					</ActionButton>
+				</button>
+			{:else}
+				<a href="/Log_In">
+					<ActionButton textColor="blue-700" hoverColor="indigo-200" />
+				</a>
 			{/if}
 		</div>
 		<!-- right ends -->
