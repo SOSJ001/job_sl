@@ -8,39 +8,39 @@
 	<div class="flex flex-row items-start justify-start px-20">
         <!-- dashboard navigation -->
 		<div class="flex w-[300px] flex-col gap-3 pl-5">
-			<span class="font-mono text-sm text-gray-500">EMPLOYEE DASHBOARD</span>
+			<span class="font-mono text-sm text-gray-500">EMPLOYER DASHBOARD</span>
 			<span>
-				<NavButton location="/Employee">
+				<NavButton location="/Dashboard/Employer">
                     <span slot="text">Overview</span>
                 </NavButton>
 			</span>
 			<span>
-				<NavButton location="/Employee/Profile">
+				<NavButton location="/Dashboard/Employer/Profile">
                     <span slot="text">Employers Profile</span>
                 </NavButton>
 			</span>
             <span>
-				<NavButton location="/Employee/Post_A_Job">
+				<NavButton location="/Dashboard/Employer/Post_A_Job">
                     <span slot="text">Post a Job</span>
                 </NavButton>
 			</span>
             <span>
-				<NavButton location="/Employee/Saved_Candidates">
+				<NavButton location="/Dashboard/Employer/Saved_Candidates">
                     <span slot="text">Saved Candidates</span>
                 </NavButton>
 			</span>
             <span>
-				<NavButton location="/Employee/Plans_Billings">
+				<NavButton location="/Dashboard/Employer/Plans_Billings">
                     <span slot="text">Plans & Billing</span>
                 </NavButton>
 			</span>
 			 <span>
-				<NavButton location="/Employee/All_Companies">
+				<NavButton location="/Dashboard/Employer/All_Companies">
                     <span slot="text">All Companies</span>
                 </NavButton>
 			</span>
 			<span>
-				<NavButton location="/Employee/Settings">
+				<NavButton location="/Dashboard/Employer/Settings">
                     <span slot="text">Settings</span>
                 </NavButton>
 			</span>
