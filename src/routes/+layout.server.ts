@@ -10,5 +10,6 @@ export function load({ cookies }) {
         // return { cookievar1 }; 
     }
 	return { cookievar1 };
+
 }
 

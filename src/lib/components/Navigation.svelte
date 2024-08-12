@@ -90,9 +90,12 @@
 		<!-- left ends -->
 		<!-- right -->
 		<div class="flex items-center justify-start gap-3">
-			<ActionButton textColor="white" buttonBg="blue-700" hoverColor="blue-400">
+			{#if $cookieUserId === "Employer" && $cookieUserId !== null }
+				<ActionButton textColor="white" buttonBg="blue-700" hoverColor="blue-400">
 				<span slot="text">Post a Job</span>
 			</ActionButton>
+			{/if}
+			
 			{#if $cookieUserId !== null}
 				<button on:click={() => alert('Sign Out not functional now!')}>
 					<ActionButton textColor="blue-700" hoverColor="indigo-200">
@@ -103,6 +106,10 @@
 				<a href="/Log_In">
 					<ActionButton textColor="blue-700" hoverColor="indigo-200" />
 				</a>
+
+				<ActionButton textColor="white" buttonBg="blue-700" hoverColor="blue-400">
+				<span slot="text">Sign up</span>
+			</ActionButton>
 			{/if}
 		</div>
 		<!-- right ends -->
