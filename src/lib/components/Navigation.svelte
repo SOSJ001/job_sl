@@ -22,7 +22,7 @@
 		if (success) {
 			$cookieUserId = null;
 			$url_path = null;
-			goto("/")
+			goto('/');
 		} else {
 			alert('error signing out');
 		}
@@ -110,9 +110,11 @@
 		<!-- right -->
 		<div class="flex items-center justify-start gap-3">
 			{#if $cookieUserId === 'Employer' && $cookieUserId !== null}
-				<ActionButton textColor="white" buttonBg="blue-700" hoverColor="blue-400">
-					<span slot="text">Post a Job</span>
-				</ActionButton>
+				<a href="/Dashboard/Employer/Post_A_Job">
+					<ActionButton textColor="white" buttonBg="blue-700" hoverColor="blue-400">
+						<span slot="text">Post a Job</span>
+					</ActionButton>
+				</a>
 			{/if}
 
 			{#if $cookieUserId !== null}
