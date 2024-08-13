@@ -11,7 +11,7 @@
 </script>
 
 <div class="w-full space-y-3">
-	<div class="text-xl font-bold">Hello, Orange7</div>
+	<div class="text-xl font-bold">Hello, Orange</div>
 	<div class="text-sm capitalize text-gray-500">here is your daily activities and application</div>
 	<div class="flex w-full flex-row justify-start gap-7 px-11">
 		<Features width="[200px]" bg="gray-100">
