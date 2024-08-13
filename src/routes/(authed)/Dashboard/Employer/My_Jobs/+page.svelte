@@ -3,7 +3,7 @@
 	import ActionButton from '$lib/components/ActionButton.svelte';
     import { Spinner } from 'flowbite-svelte'
     export let data
-	data.jobTableResult.then((data)=>{console.log("data", data)})
+	// data.jobTableResult.then((data)=>{console.log("data", data)})
     let rows = data.jobTableResult;
     let applicants = 15
 </script>
@@ -24,7 +24,7 @@
 	</div>
 	<!-- table body  -->
      {#await rows}
-        <Spinner size={8} />
+        <Spinner color="blue" size={8} />
      {:then row} 
         <div class="p-2 shadow grid grid-cols-2 items-center justify-between text-center font-mono">
 		<div class="flex flex-row gap-2">
