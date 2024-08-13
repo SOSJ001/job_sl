@@ -5,7 +5,7 @@
 	export let data;
 	// data.jobTableResult.then((data)=>{console.log("data", data)})
 	let rows = data.jobTableResult;
-	let applicants :number;
+	let applicants :number= 0;
 </script>
 
 <div class="w-full space-y-3 overflow-y-auto">
