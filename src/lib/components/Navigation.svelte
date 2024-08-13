@@ -48,9 +48,9 @@
 					<span slot="text">Profile</span>
 				</NavButton>
 			{/if}
-			<NavButton location="/">
+			<!-- <NavButton location="/">
 				<span slot="text">Customer Supports</span>
-			</NavButton>
+			</NavButton> -->
 		</div>
 		<div class="flex items-center justify-start gap-6">
 			<div class="flex items-center justify-start gap-2">
