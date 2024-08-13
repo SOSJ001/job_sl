@@ -100,6 +100,7 @@
 							on:click={async (e) => {
 								// insertAppliedJob;
 								let insertError = await insertIntoAppliedJobs(rowdata.id);
+								// let insertError = null
 								if (insertError === null) {
 									changeText(rowdata.id)
 									alert("Application Successful, Navigate to 'Applied Jobs'  to see jobs");
