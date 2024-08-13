@@ -28,8 +28,8 @@
      {:then row} 
         <div class="p-2 shadow grid grid-cols-2 items-center justify-between text-center font-mono">
 		<div class="flex flex-row gap-2">
-			<div class="grid-col-2 flex h-full flex-col items-center justify-center gap-3">
-				<div class="text-md flex items-center justify-center">
+			<div class="grid-col-2 flex h-full flex-col items-center justify-center gap-3 w-full">
+				<div class="text-md flex items-center justify-between bg-red-500 w-full">
 					<span>{row[0].jobTitle}</span>
 					<span class="text-nowrap rounded-sm bg-green-100 px-2 py-1">
 						<div class="text-xs font-semibold uppercase leading-3 text-green-600">
