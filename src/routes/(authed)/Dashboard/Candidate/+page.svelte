@@ -11,6 +11,10 @@
 	// });
 	let rows = data.relatedJobTableResult;
 	// console.log(rows)
+	function changeText(id: string){
+		 const button = document.getElementById(id);
+		 if(button !== null) button.innerText = "APPLIED";
+	}
 
 	// put the job id in the button pass as param to the insert into applied job tables
 </script>
@@ -93,10 +97,11 @@
 						<div>{rowdata.created_at}</div>
 						<div class="text-green-700">Active</div>
 						<button
-							on:click={async () => {
+							on:click={async (e) => {
 								// insertAppliedJob;
 								let insertError = await insertIntoAppliedJobs(rowdata.id);
 								if (insertError === null) {
+									changeText(rowdata.id)
 									alert("Application Successful, Navigate to 'Applied Jobs'  to see jobs");
 								} else {
 									console.log("this is the error", insertError);
@@ -104,7 +109,7 @@
 							}}
 						>
 							<ActionButton textColor="blue-700" hoverColor="gray-200" buttonBg="gray-100">
-								<span slot="text">Apply Now</span>
+								<span id="{rowdata.id}" slot="text">Apply Now</span>
 							</ActionButton>
 						</button>
 					</div>
