@@ -1,6 +1,10 @@
 <script lang="ts">
 	import Features from '$lib/components/Features.svelte';
 	import ActionButton from '$lib/components/ActionButton.svelte';
+    import { Spinner } from 'flowbite-svelte'
+    export let data
+	data.jobTableResult.then((data)=>{console.log("data", data)})
+    let rows = data.jobTableResult;
     let applicants = 15
 </script>
 
@@ -19,20 +23,23 @@
 		</div>
 	</div>
 	<!-- table body  -->
-	<div class="p-2 shadow grid grid-cols-2 items-center justify-between text-center font-mono">
+     {#await rows}
+        <Spinner size={8} />
+     {:then row} 
+        <div class="p-2 shadow grid grid-cols-2 items-center justify-between text-center font-mono">
 		<div class="flex flex-row gap-2">
 			<div class="grid-col-2 flex h-full flex-col items-center justify-center gap-3">
 				<div class="text-md flex items-center justify-center">
-					<span>Techical Support Specialist</span>
+					<span>{row[0].jobTitle}</span>
 					<span class="text-nowrap rounded-sm bg-green-100 px-2 py-1">
 						<div class="text-xs font-semibold uppercase leading-3 text-green-600">
-							<slot name="role">Remote</slot>
+							<slot name="role">{row[0].remote === null?"":row[0].remote}</slot>
 						</div>
 					</span>
 				</div>
 				<div class="flex w-full flex-row justify-between text-gray-500">
 					<span>Brazil</span>
-					<span>$50k-80k/month</span>
+					<span>${row[0].minSalary}-{row[0].maxSalary}k/month</span>
 				</div>
 			</div>
 		</div>
@@ -46,6 +53,8 @@
 			</button>
 		</div>
 	</div>
+     {/await}
+	
     
 	<!-- Table Body ends -->
 </div>

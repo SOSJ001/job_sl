@@ -89,6 +89,7 @@ export async function insertIntoJobTable(
 
 export async function loadJobRows() {
 	let { data: jobTable, error } = await supabase.from('jobTable').select('*');
+	return jobTable
 
 }
 
