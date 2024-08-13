@@ -59,7 +59,7 @@
 						<div class="text-green-700">Active</div>
 						<button>
 							<ActionButton textColor="blue-700" hoverColor="gray-200" buttonBg="gray-100">
-								<span slot="text">Apply Now</span>
+								<span slot="text">Applied</span>
 							</ActionButton>
 						</button>
 					</div>
