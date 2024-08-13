@@ -36,9 +36,9 @@
 			<NavButton location="/Find_Job">
 				<span slot="text">Find Job</span>
 			</NavButton>
-			<NavButton location="/">
+			<!-- <NavButton location="/">
 				<span slot="text">Employers</span>
-			</NavButton>
+			</NavButton> -->
 			{#if $cookieUserId !== null}
 				<NavButton location="/Dashboard/{$url_path}">
 					<span slot="text">Dashboard</span>
