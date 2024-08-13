@@ -5,21 +5,12 @@
 	import orange from '$lib/icon/orange.png';
 	import { Spinner } from 'flowbite-svelte';
 	import { insertIntoAppliedJobs } from '$lib/supabase/store.js';
-	let job_id: number;
-	let insertAppliedJob = async () => {
-		console.log('here');
-		let insertError = await insertIntoAppliedJobs(job_id);
-		if (insertError === null) {
-			alert("Job Successfuly Inserted, Navigate to 'My Jobs' to see jobs");
-		} else {
-			console.log('error inputing data');
-		}
-	};
 	export let data;
-	data.relatedJobTableResult.then((data) => {
-		console.log('data', data);
-	});
+	// data.relatedJobTableResult.then((data) => {
+	// 	console.log('data', data);
+	// });
 	let rows = data.relatedJobTableResult;
+	// console.log(rows)
 
 	// put the job id in the button pass as param to the insert into applied job tables
 </script>
@@ -106,7 +97,7 @@
 								// insertAppliedJob;
 								let insertError = await insertIntoAppliedJobs(rowdata.id);
 								if (insertError === null) {
-									alert("Application Successful, Navigate to 'Applied Jobs' jobs");
+									alert("Application Successful, Navigate to 'Applied Jobs'  to see jobs");
 								} else {
 									console.log("this is the error", insertError);
 								}
