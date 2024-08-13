@@ -3,6 +3,25 @@
 	import Pp from '$lib/icon/profilePicture.png';
 	import ActionButton from '$lib/components/ActionButton.svelte';
 	import orange from '$lib/icon/orange.png';
+	import { Spinner } from 'flowbite-svelte';
+	import { insertIntoAppliedJobs } from '$lib/supabase/store.js';
+	let job_id: number;
+	let insertAppliedJob = async () => {
+		console.log('here');
+		let insertError = await insertIntoAppliedJobs(job_id);
+		if (insertError === null) {
+			alert("Job Successfuly Inserted, Navigate to 'My Jobs' to see jobs");
+		} else {
+			console.log('error inputing data');
+		}
+	};
+	export let data;
+	data.relatedJobTableResult.then((data) => {
+		console.log('data', data);
+	});
+	let rows = data.relatedJobTableResult;
+
+	// put the job id in the button pass as param to the insert into applied job tables
 </script>
 
 <div class="w-full space-y-3">
@@ -36,7 +55,7 @@
 		</div>
 	</div>
 	<div class=" flex justify-between font-semibold">
-		<span>Recently Applied</span>
+		<span>Related Jobs</span>
 		<button class="text-gray-600">View All</button>
 	</div>
 	<!-- table data below in a grid format -->
@@ -44,75 +63,63 @@
 		<!-- table header  -->
 		<div class="">Job</div>
 		<div class="grid grid-cols-3">
-			<div>Date Applied</div>
+			<div>Date Posted</div>
 			<div>Status</div>
 			<div>Action</div>
 		</div>
 	</div>
 	<!-- table body  -->
-	<div class="p-2 shadow grid grid-cols-2 items-center justify-between text-center font-mono">
-		<div class="flex flex-row gap-2">
-			<div>
-				<div class="h-14 w-14">
-					<slot name="companylogo"><img alt="company_logo" class="w-14" src={orange} /></slot>
-				</div>
-			</div>
-			<div class="grid-col-2 flex h-full flex-col items-center justify-center gap-3">
-				<div class="text-md flex items-center justify-center">
-					<span>Techical Support Specialist</span>
-					<span class="text-nowrap rounded-sm bg-green-100 px-2 py-1">
-						<div class="text-xs font-semibold uppercase leading-3 text-green-600">
-							<slot name="role">Remote</slot>
+	{#await rows}
+		<Spinner color="blue" size={8} />
+	{:then row}
+		{#if row !== null}
+			{#each row as rowdata}
+				<div
+					class="grid grid-cols-2 items-center justify-between gap-5 p-2 text-center font-mono shadow"
+				>
+					<div class="flex flex-row gap-2">
+						<div>
+							<div class="h-14 w-14">
+								<slot name="companylogo"><img alt="company_logo" class="w-14" src={orange} /></slot>
+							</div>
 						</div>
-					</span>
-				</div>
-				<div class="flex w-full flex-row justify-between text-gray-500">
-					<span>Brazil</span>
-					<span>$50k-80k/month</span>
-				</div>
-			</div>
-		</div>
-		<div class="grid grid-cols-3 items-center justify-center text-sm">
-			<div>Feb 8, 2019 19:28</div>
-			<div class="text-green-700">Active</div>
-			<div>
-				<ActionButton textColor="blue-700" hoverColor="gray-200" buttonBg="gray-100">
-					<span slot="text">View Details</span>
-				</ActionButton>
-			</div>
-		</div>
-	</div>
-	<div class="p-2 shadow grid grid-cols-2 items-center justify-between text-center font-mono">
-		<div class="flex flex-row gap-2">
-			<div>
-				<div class="h-14 w-14">
-					<slot name="companylogo"><img alt="company_logo" class="w-14" src={orange} /></slot>
-				</div>
-			</div>
-			<div class="grid-col-2 flex h-full flex-col items-center justify-center gap-3">
-				<div class="text-md flex items-center justify-center">
-					<span>Techical Support Specialist</span>
-					<span class="text-nowrap rounded-sm bg-green-100 px-2 py-1">
-						<div class="text-xs font-semibold uppercase leading-3 text-green-600">
-							<slot name="role">Remote</slot>
+						<div class="grid-col-2 flex h-full w-full flex-col items-center justify-center gap-3">
+							<div class="text-md flex w-full items-center justify-between">
+								<span>{rowdata.jobTitle}</span>
+								<span class="text-nowrap rounded-sm bg-green-100 px-2 py-1">
+									<div class="text-xs font-semibold uppercase leading-3 text-green-600">
+										<slot name="role">{rowdata.remote === null ? '' : rowdata.remote}</slot>
+									</div>
+								</span>
+							</div>
+							<div class="flex w-full flex-row justify-between text-gray-500">
+								<span>{rowdata.country}</span>
+								<span>${rowdata.minSalary}-{rowdata.maxSalary}k/month</span>
+							</div>
 						</div>
-					</span>
+					</div>
+					<div class="grid grid-cols-3 items-center justify-center text-sm">
+						<div>{rowdata.created_at}</div>
+						<div class="text-green-700">Active</div>
+						<button
+							on:click={async () => {
+								// insertAppliedJob;
+								let insertError = await insertIntoAppliedJobs(rowdata.id);
+								if (insertError === null) {
+									alert("Application Successful, Navigate to 'Applied Jobs' jobs");
+								} else {
+									console.log("this is the error", insertError);
+								}
+							}}
+						>
+							<ActionButton textColor="blue-700" hoverColor="gray-200" buttonBg="gray-100">
+								<span slot="text">Apply Now</span>
+							</ActionButton>
+						</button>
+					</div>
 				</div>
-				<div class="flex w-full flex-row justify-between text-gray-500">
-					<span>Brazil</span>
-					<span>$50k-80k/month</span>
-				</div>
-			</div>
-		</div>
-		<div class="grid grid-cols-3 items-center justify-center text-sm">
-			<div>Feb 8, 2019 19:28</div>
-			<div class="text-green-700">Active</div>
-			<div>
-				<ActionButton textColor="blue-700" hoverColor="gray-200" buttonBg="gray-100">
-					<span slot="text">View Details</span>
-				</ActionButton>
-			</div>
-		</div>
-	</div>
+			{/each}
+		{/if}
+	{/await}
 	<!-- Table Body ends -->
 </div>

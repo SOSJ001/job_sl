@@ -93,3 +93,11 @@ export async function loadJobRows() {
 
 }
 
+
+export async function insertIntoAppliedJobs(job_id: string) {
+	const { error } = await supabase.from('appliedJobs').insert({
+		job_id: job_id
+	});
+	return error;
+}
+
