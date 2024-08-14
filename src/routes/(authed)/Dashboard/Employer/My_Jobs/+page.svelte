@@ -5,12 +5,14 @@
 	import { Button, Modal } from 'flowbite-svelte';
 	let defaultModal = false;
 	export let data;
-	// data.jobAndApplicantsResults.then((data) => {
-	// 	console.log('data', data[0].raw_user_meta_data);
-	// });
+	let jobId: Int8Array;
+	data.jobAndApplicantsResults.then((data) => {
+		console.log('data', data);
+	});
 	let rows = data.jobTableResult;
 	let jobAndApplicantsRow = data.jobAndApplicantsResults;
 	let applicants: number = 0;
+	let applied_id: Int8Array
 </script>
 
 <div class="w-full space-y-3 overflow-y-auto">
@@ -57,6 +59,7 @@
 						<div class="text-green-700">Active</div>
 						<button
 							on:click={() => {
+								jobId = rowdata.id;
 								defaultModal = true;
 							}}
 						>
@@ -88,38 +91,42 @@
 		<div>Email</div>
 		<div>Action</div>
 	</div>
-	<!-- table body  -->
+	<!-- table body  job_id-->
 	{#await jobAndApplicantsRow}
 		<Spinner color="blue" size={8} />
 	{:then row}
 		{#if row !== null}
 			{#each row as rowdata}
-				<div
-					class="grid grid-cols-3 items-center justify-center gap-5 p-2 text-center font-mono text-gray-600 shadow"
-				>
-					<div class="gap- flex flex-row">
-						<div>
-							{rowdata.raw_user_meta_data.first_name + ' ' + rowdata.raw_user_meta_data.first_name}
+				{#if rowdata.job_id === jobId}
+					<div
+						class="grid grid-cols-3 items-center justify-center gap-5 p-2 text-center font-mono text-gray-600 shadow"
+					>
+						<div class="gap- flex flex-row">
+							<div>
+								{rowdata.raw_user_meta_data.first_name +
+									' ' +
+									rowdata.raw_user_meta_data.first_name}
+							</div>
+						</div>
+						<!--  -->
+
+						<div>{rowdata.raw_user_meta_data.email}</div>
+						<div class="flex w-full gap-2">
+							<button
+								on:click={() => {
+									alert(' Candidate Accepted');
+								}}
+							>
+								<ActionButton textColor="blue-700" hoverColor="gray-200" buttonBg="gray-100">
+									<span slot="text">Accept</span>
+								</ActionButton>
+							</button>
+							<ActionButton textColor="blue-700" hoverColor="gray-200" buttonBg="gray-100">
+								<span slot="text">Download C.V</span>
+							</ActionButton>
 						</div>
 					</div>
-					<!--  -->
-
-					<div>{rowdata.raw_user_meta_data.email}</div>
-					<div class="w-full flex gap-2">
-						<button
-							on:click={() => {
-								alert(" Candidate Accepted")
-							}}
-						>
-							<ActionButton textColor="blue-700" hoverColor="gray-200" buttonBg="gray-100">
-								<span slot="text">Accept</span>
-							</ActionButton>
-						</button>
-						<ActionButton textColor="blue-700" hoverColor="gray-200" buttonBg="gray-100">
-							<span slot="text">Download C.V</span>
-						</ActionButton>
-					</div>
-				</div>
+				{/if}
 			{/each}
 		{/if}
 	{/await}

@@ -24,7 +24,8 @@
 
 	<div class=" flex justify-between font-semibold">
 		<span>Recently Posted Jobs</span>
-		<button class="text-gray-600">View All</button>
+		<a href="/Dashboard/Employer/My_Jobs"><button class="text-gray-600">View All</button></a>
+		
 	</div>
 	<!-- table data below in a grid format -->
 	<div class="grid grid-cols-2 bg-gray-100 p-5 text-center font-mono font-semibold">
@@ -69,11 +70,11 @@
 					<div class="grid grid-cols-3 items-center justify-center text-sm text-gray-500">
 						<div>{applicants} Applications</div>
 						<div class="text-green-700">Active</div>
-						<button on:click={() => alert('functionality not active yet')}>
+						<a href="/Dashboard/Employer/My_Jobs">
 							<ActionButton textColor="blue-700" hoverColor="gray-200" buttonBg="gray-100">
 								<span slot="text">View Details</span>
 							</ActionButton>
-						</button>
+						</a>
 					</div>
 				</div>
 			{/each}
