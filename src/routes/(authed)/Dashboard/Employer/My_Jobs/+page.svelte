@@ -10,7 +10,7 @@
 
 <div class="w-full space-y-3 overflow-y-auto">
 	<div class=" flex justify-start font-semibold">
-		<span>Applied Jobs <span class="text-gray-400">(589)</span></span>
+		<span>My Jobs <span class="text-gray-400">(589)</span></span>
 	</div>
 	<!-- table data below in a grid format -->
 	<div class="grid grid-cols-2 bg-gray-100 p-5 text-center font-mono font-semibold">

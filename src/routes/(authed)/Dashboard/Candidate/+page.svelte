@@ -43,11 +43,11 @@
 				<div>Complete your profile editing & build your custom Resume</div>
 			</div>
 		</div>
-		<div>
+		<a href="/Dashboard/Candidate/Settings">
 			<ActionButton hoverColor="gray-100" textColor="red-500" buttonBg="white" width="[200px]">
 				<span slot="text"> Edit Profile </span>
 			</ActionButton>
-		</div>
+		</a>
 	</div>
 	<div class=" flex justify-between font-semibold">
 		<span>Related Jobs</span>
