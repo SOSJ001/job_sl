@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
 import { supabase } from './connection';
 export let cookieUserId = writable(null);
-export let url_path = writable(null);
+export let url_path = writable(null); 
 export async function signin(email: string, password: string) {
 	const { data, error } = await supabase.auth.signInWithPassword({
 		email,
@@ -41,7 +41,18 @@ export async function signup(
 	};
 }
 
+
+// use this on the server side
 export async function getUser() {
+	const { data, error } = await supabase.auth.getUser();
+	return {
+		data,
+		error
+	};
+}
+
+// use this on the client side
+export async function getSession() {
 	const { data, error } = await supabase.auth.getUser();
 	return {
 		data,
@@ -94,9 +105,10 @@ export async function loadJobRows() {
 }
 
 
-export async function insertIntoAppliedJobs(job_id: string) {
+export async function insertIntoAppliedJobs(job_id: string, user_id: string) {
 	const { error } = await supabase.from('appliedJobs').insert({
-		job_id: job_id
+		job_id: job_id,
+		user_id: user_id
 	});
 	return error;
 }
@@ -106,3 +118,22 @@ export async function loadAppliedJobRows() {
 	return AppliedJob;
 }
 
+export function uuidToBigInt(uuid: string) {
+	// Remove hyphens from UUID
+	const cleanedUuid = uuid.replace(/-/g, '');
+
+	// Ensure the cleaned UUID is 32 hex characters long
+	if (cleanedUuid.length !== 32) {
+		throw new Error('Invalid UUID format');
+	}
+
+	// Convert the hex string to a BigInt
+	return BigInt('0x' + cleanedUuid);
+}
+
+export async function appliedjobsview() {
+	let { data: appliedjobsview, error } = await supabase
+		.from('appliedjobsview')
+		.select('*')
+	return appliedjobsview
+}

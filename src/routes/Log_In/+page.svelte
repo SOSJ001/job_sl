@@ -2,14 +2,15 @@
 	// @ts-nocheck
 	import { goto } from '$app/navigation';
 	import ActionButton from '$lib/components/ActionButton.svelte';
-	import {url_path} from '$lib/supabase/store'
-	import {cookieUserId} from '$lib/supabase/store'
+	import { url_path } from '$lib/supabase/store';
+	import { cookieUserId } from '$lib/supabase/store';
+	import Nav from '$lib/components/Navigation.svelte';
 
-	let email //login email
+	let email; //login email
 	let password; //login password
-	let signinFunction = async() => {
-		let mail = email.value
-		let passcode = password.value
+	let signinFunction = async () => {
+		let mail = email.value;
+		let passcode = password.value;
 		// alert("email is: "+ email.value + " password is: "+ password.value)
 		const response = await fetch('/Log_In/Login_Api', {
 			method: 'POST',
@@ -22,14 +23,16 @@
 		//destructing the response object
 		const { supabaseError, supabaseSession, cookieVariable } = await response.json(); //wait for the responso from the server
 		// console.log('this is the cookie variable', supabaseSession);
-		$cookieUserId = cookieVariable
+		sessionStorage.setItem('supabaseSession',  JSON.stringify( supabaseSession.user.id));
+		$cookieUserId = cookieVariable;
 		$url_path = supabaseSession.user.user_metadata.role;
-		goto(`/Dashboard/${$url_path}`)
+		goto(`/Dashboard/${$url_path}`);
 	};
 </script>
 
-<div class="flex h-screen w-full flex-row items-center justify-center overflow-hidden">
-	<div class="justify flex flex-col gap-7 p-5 md:w-[500px]">
+<Nav />
+<div class="flex h-full w-full flex-row items-center justify-center overflow-hidden">
+	<div class="justify flex flex-col gap-7 p-20 md:w-[500px] bg-gray-200 rounded-lg">
 		<div class="flex flex-row justify-between">
 			<span class="font-mono text-2xl font-bold">Sign In</span>
 			<a href="/">
@@ -51,14 +54,16 @@
 		<form action="" class=" space-y-5">
 			<!-- email input field -->
 			<!-- <Input id="email" type="email" placeholder="name@flowbite.com"/> -->
-			<input bind:this={email}
+			<input
+				bind:this={email}
 				type="email"
 				class="h-full w-full text-nowrap rounded-sm border-gray-300 text-base font-normal leading-normal text-gray-400 focus:border-transparent focus:outline-none focus:ring-0 focus:ring-transparent"
 				placeholder="michaelsosj@gmail.com"
 			/>
 
 			<!-- password input field -->
-			<input bind:this={password}
+			<input
+				bind:this={password}
 				type="password"
 				class="h-full w-full text-nowrap rounded-sm border-gray-300 text-base font-normal leading-normal text-gray-400 focus:border-transparent focus:outline-none focus:ring-0 focus:ring-transparent"
 				placeholder="*********"

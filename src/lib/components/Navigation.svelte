@@ -22,6 +22,7 @@
 		if (success) {
 			$cookieUserId = null;
 			$url_path = null;
+			sessionStorage.clear()
 			goto('/');
 		} else {
 			alert('error signing out');

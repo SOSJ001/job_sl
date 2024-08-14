@@ -3,33 +3,34 @@
 	import orange from '$lib/icon/orange.png';
 	import { Spinner } from 'flowbite-svelte';
 	export let data;
-	let button
-	data.appliedJobTableResult.then((data) => {
-		console.log('data', data);
-	});
-	let rows = data.appliedJobTableResult;
+	const storedData = sessionStorage.getItem('supabaseSession');
+	// data.appliedjobsviewResult.then((data) => {
+	// 	console.log('data', data);
+	// });
+	let rows = data.appliedjobsviewResult;
 </script>
 
 <div class="w-full space-y-3 overflow-y-auto">
 	<div class=" flex justify-start font-semibold">
-		<span>Applied Jobs <span class="text-gray-400">(589)</span></span>
+		<span>Applied Jobs <span class="text-gray-400">*</span></span>
 	</div>
 	<!-- table data below in a grid format -->
 	<div class="grid grid-cols-2 bg-gray-100 p-5 text-center font-mono font-semibold">
 		<!-- table header  -->
 		<div class="">Job</div>
 		<div class="grid grid-cols-3">
-			<div>Date Applied</div>
+			<div>Date Posted</div>
 			<div>Status</div>
 			<div>Action</div>
 		</div>
 	</div>
 	<!-- table body  -->
-   {#await rows}
+	{#await rows}
 		<Spinner color="blue" size={8} />
 	{:then row}
 		{#if row !== null}
 			{#each row as rowdata}
+			{#if rowdata.user_id === JSON.parse(storedData)}
 				<div
 					class="grid grid-cols-2 items-center justify-between gap-5 p-2 text-center font-mono shadow"
 				>
@@ -55,19 +56,19 @@
 						</div>
 					</div>
 					<div class="grid grid-cols-3 items-center justify-center text-sm">
-						<div>{rowdata.created_at}</div>
-						<div class="text-green-700">Active</div>
+						<div>{new Date(rowdata.created_at)}</div>
+						<div class="text-green-700">Pending</div>
 						<button>
-							<ActionButton textColor="blue-700" hoverColor="gray-200" buttonBg="gray-100">
-								<span slot="text">Applied</span>
-							</ActionButton>
+							<span class="font-bold text-green-500">Applied</span>
 						</button>
 					</div>
 				</div>
+			{/if}
+			
+				
 			{/each}
 		{/if}
 	{/await}
-    
-    
+
 	<!-- Table Body ends -->
 </div>

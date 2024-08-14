@@ -4,7 +4,7 @@
 	import ActionButton from '$lib/components/ActionButton.svelte';
 	import orange from '$lib/icon/orange.png';
 	import { Spinner } from 'flowbite-svelte';
-	import { insertIntoAppliedJobs } from '$lib/supabase/store.js';
+	import { insertIntoAppliedJobs, uuidToBigInt } from '$lib/supabase/store.js';
 	export let data;
 	// data.relatedJobTableResult.then((data) => {
 	// 	console.log('data', data);
@@ -94,12 +94,15 @@
 						</div>
 					</div>
 					<div class="grid grid-cols-3 items-center justify-center text-sm">
-						<div>{rowdata.created_at}</div>
+						<div>{new Date(rowdata.created_at)}</div>
 						<div class="text-green-700">Active</div>
-						<button
-							on:click={async (e) => {
+						<button id="{rowdata.id}" class="text-green-500 font-bold"
+							on:click|once={async () => {
 								// insertAppliedJob;
-								let insertError = await insertIntoAppliedJobs(rowdata.id);
+								const storedData = sessionStorage.getItem('supabaseSession');
+								if(storedData === null) {return}
+								let insertError = await insertIntoAppliedJobs(rowdata.id, JSON.parse(storedData));
+								// alert(JSON.parse(storedData))
 								// let insertError = null
 								if (insertError === null) {
 									changeText(rowdata.id)
@@ -110,7 +113,7 @@
 							}}
 						>
 							<ActionButton textColor="blue-700" hoverColor="gray-200" buttonBg="gray-100">
-								<span id="{rowdata.id}" slot="text">Apply Now</span>
+								<span  slot="text">Apply Now</span>
 							</ActionButton>
 						</button>
 					</div>

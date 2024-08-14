@@ -1,6 +1,7 @@
 <script lang="ts">
 	// @ts-nocheck
 	import { Tabs, TabItem } from 'flowbite-svelte';
+import Nav from '$lib/components/Navigation.svelte'
 	import ActionButton from '$lib/components/ActionButton.svelte';
 	import { Input } from 'flowbite-svelte';
 	import { goto } from "$app/navigation";
@@ -64,8 +65,9 @@
 		goto("/Log_In");
 	};
 </script>
-
-<div class="flex h-screen w-full flex-col items-center justify-center overflow-hidden">
+<Nav/>
+<div class="h-full w-full flex items-center justify-center">
+<div class="flex  flex-col items-center justify-center overflow-hidden bg-gray-200 p-10 rounded-lg">
 	<div class="flex flex-row gap-3 font-mono">
 		<button on:click={setCandidate} class="{candidate ? activebg : ''} rounded-lg bg-gray-100 p-5"
 			>Candidate</button
@@ -133,3 +135,5 @@
 		</div>
 	</div>
 </div>
+</div>
+
