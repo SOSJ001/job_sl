@@ -2,6 +2,8 @@
 	import Features from '$lib/components/Features.svelte';
 	import ActionButton from '$lib/components/ActionButton.svelte';
 	import { Spinner } from 'flowbite-svelte';
+	import { Button, Modal } from 'flowbite-svelte';
+	let defaultModal = false;
 	export let data;
 	// data.jobTableResult.then((data)=>{console.log("data", data)})
 	let rows = data.jobTableResult;
@@ -50,9 +52,13 @@
 					<div class="grid grid-cols-3 items-center justify-center text-sm text-gray-500">
 						<div>{applicants} Applications</div>
 						<div class="text-green-700">Active</div>
-						<button on:click={() => alert('functionality not active yet')}>
+						<button
+							on:click={() => {
+								defaultModal = true;
+							}}
+						>
 							<ActionButton textColor="blue-700" hoverColor="gray-200" buttonBg="gray-100">
-								<span slot="text">View Details</span>
+								<span slot="text">View <br> Applications</span>
 							</ActionButton>
 						</button>
 					</div>
@@ -63,3 +69,14 @@
 
 	<!-- Table Body ends -->
 </div>
+<Modal color="blue" title="Application Details" bind:open={defaultModal} autoclose>
+	<div class="grid grid-cols-2 bg-gray-100 p-5 text-center font-mono font-semibold text-gray-700">
+		<!-- table header  -->
+		<div class="">Applicants Name</div>
+		<div class="grid grid-cols-3">
+			<div>Applications</div>
+			<div>Status</div>
+			<div>Action</div>
+		</div>
+	</div>
+</Modal>
