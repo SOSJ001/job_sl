@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
 import { supabase } from './connection';
 export let cookieUserId = writable(null);
-export let url_path = writable(null); 
+export let url_path = writable(null);
 export async function signin(email: string, password: string) {
 	const { data, error } = await supabase.auth.signInWithPassword({
 		email,
@@ -41,7 +41,6 @@ export async function signup(
 	};
 }
 
-
 // use this on the server side
 export async function getUser() {
 	const { data, error } = await supabase.auth.getUser();
@@ -76,7 +75,7 @@ export async function insertIntoJobTable(
 	jobType: string,
 	country: string,
 	city: string,
-	remote:string,
+	remote: string,
 	jobBenefit: string,
 	jobDescription: string
 ) {
@@ -95,15 +94,13 @@ export async function insertIntoJobTable(
 		jobBenefit: jobBenefit,
 		jobDescription: jobDescription
 	});
-	return error
+	return error;
 }
 
 export async function loadJobRows() {
 	let { data: jobTable, error } = await supabase.from('jobTable').select('*');
-	return jobTable
-
+	return jobTable;
 }
-
 
 export async function insertIntoAppliedJobs(job_id: string, user_id: string) {
 	const { error } = await supabase.from('appliedJobs').insert({
@@ -132,8 +129,11 @@ export function uuidToBigInt(uuid: string) {
 }
 
 export async function appliedjobsview() {
-	let { data: appliedjobsview, error } = await supabase
-		.from('appliedjobsview')
-		.select('*')
-	return appliedjobsview
+	let { data: appliedjobsview, error } = await supabase.from('appliedjobsview').select('*');
+	return appliedjobsview;
+}
+
+export async function jobAndApplicants() {
+	let { data: jobandapplicants, error } = await supabase.from('jobandapplicants').select('*');
+	return jobandapplicants;
 }

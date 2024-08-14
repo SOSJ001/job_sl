@@ -5,8 +5,11 @@
 	import { Button, Modal } from 'flowbite-svelte';
 	let defaultModal = false;
 	export let data;
-	// data.jobTableResult.then((data)=>{console.log("data", data)})
+	// data.jobAndApplicantsResults.then((data) => {
+	// 	console.log('data', data[0].raw_user_meta_data);
+	// });
 	let rows = data.jobTableResult;
+	let jobAndApplicantsRow = data.jobAndApplicantsResults;
 	let applicants: number = 0;
 </script>
 
@@ -58,7 +61,7 @@
 							}}
 						>
 							<ActionButton textColor="blue-700" hoverColor="gray-200" buttonBg="gray-100">
-								<span slot="text">View <br> Applications</span>
+								<span slot="text">View <br /> Applications</span>
 							</ActionButton>
 						</button>
 					</div>
@@ -69,14 +72,55 @@
 
 	<!-- Table Body ends -->
 </div>
-<Modal color="blue" title="Application Details" bind:open={defaultModal} autoclose>
-	<div class="grid grid-cols-2 bg-gray-100 p-5 text-center font-mono font-semibold text-gray-700">
+
+<!-- Modal below -->
+<Modal
+	outsideclose
+	color="blue"
+	size="lg"
+	title="Application Details"
+	bind:open={defaultModal}
+	autoclose
+>
+	<div class="grid grid-cols-3 bg-gray-100 p-5 text-center font-mono font-semibold text-gray-700">
 		<!-- table header  -->
 		<div class="">Applicants Name</div>
-		<div class="grid grid-cols-3">
-			<div>Applications</div>
-			<div>Status</div>
-			<div>Action</div>
-		</div>
+		<div>Email</div>
+		<div>Action</div>
 	</div>
+	<!-- table body  -->
+	{#await jobAndApplicantsRow}
+		<Spinner color="blue" size={8} />
+	{:then row}
+		{#if row !== null}
+			{#each row as rowdata}
+				<div
+					class="grid grid-cols-3 items-center justify-center gap-5 p-2 text-center font-mono text-gray-600 shadow"
+				>
+					<div class="gap- flex flex-row">
+						<div>
+							{rowdata.raw_user_meta_data.first_name + ' ' + rowdata.raw_user_meta_data.first_name}
+						</div>
+					</div>
+					<!--  -->
+
+					<div>{rowdata.raw_user_meta_data.email}</div>
+					<div class="w-full flex gap-2">
+						<button
+							on:click={() => {
+								alert(" Candidate Accepted")
+							}}
+						>
+							<ActionButton textColor="blue-700" hoverColor="gray-200" buttonBg="gray-100">
+								<span slot="text">Accept</span>
+							</ActionButton>
+						</button>
+						<ActionButton textColor="blue-700" hoverColor="gray-200" buttonBg="gray-100">
+							<span slot="text">Download C.V</span>
+						</ActionButton>
+					</div>
+				</div>
+			{/each}
+		{/if}
+	{/await}
 </Modal>
