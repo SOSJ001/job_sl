@@ -116,7 +116,7 @@
 										console.log('this is the error', insertError);
 									}
 								} else {
-									alert('You Have Already Applied!!!');
+									alert('You Have Already Applied !!!');
 									changeText(rowdata.id);
 									return;
 								}
