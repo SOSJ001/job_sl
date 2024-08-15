@@ -3,12 +3,14 @@
 	import Pp from '$lib/icon/profilePicture.png';
 	import ActionButton from '$lib/components/ActionButton.svelte';
 	import orange from '$lib/icon/orange.png';
-	import { Spinner } from 'flowbite-svelte';
+	import { Modal, Spinner } from 'flowbite-svelte';
 	import { insertIntoAppliedJobs, checkAppliedJobs } from '$lib/supabase/store.js';
+	let defaultModal = false;
+	let jobArray_index: any
 	export let data;
-	// data.relatedJobTableResult.then((data) => {
-	// 	console.log('data', data);
-	// });
+	data.relatedJobTableResult.then((data) => {
+		console.log('data', data);
+	});
 	let rows = data.relatedJobTableResult;
 	// console.log(rows)
 	function changeText(id: string) {
@@ -68,7 +70,7 @@
 		<Spinner color="blue" size={8} />
 	{:then row}
 		{#if row !== null}
-			{#each row as rowdata}
+			{#each row as rowdata,i}
 				<div
 					class="grid grid-cols-2 items-center justify-between gap-5 p-2 text-center font-mono shadow"
 				>
@@ -96,36 +98,57 @@
 					<div class="grid grid-cols-3 items-center justify-center text-sm">
 						<div>{new Date(rowdata.created_at)}</div>
 						<div class="text-green-700">Active</div>
-						<button
-							id={rowdata.id}
-							class="font-bold text-green-500"
-							on:click|once={async () => {
-								// insertAppliedJob;
-								const storedData = sessionStorage.getItem('supabaseSession');
-								if (storedData === null) {
-									return;
-								}
-								const checkAppliedJob = await checkAppliedJobs(rowdata.id, JSON.parse(storedData));
-								if (checkAppliedJob !== undefined && checkAppliedJob.length === 0) {
-									let insertError = await insertIntoAppliedJobs(rowdata.id, JSON.parse(storedData));
-									// let insertError = null;
-									if (insertError === null) {
-										changeText(rowdata.id);
-										alert("Application Successful, Navigate to 'Applied Jobs'  to see jobs");
-									} else {
-										console.log('this is the error', insertError);
+						<div class="flex flex-col gap-2 items-center justify-center">
+							<!-- job description button  -->
+							<button
+								class="font-bold text-green-500"
+								on:click={async () => {
+									jobArray_index = i
+									defaultModal = true
+								}}
+							>
+								<ActionButton textColor="blue-700" hoverColor="gray-200" buttonBg="gray-100">
+									<span slot="text">Description</span>
+								</ActionButton>
+							</button>
+							<!-- apply job buton -->
+							<button
+								id={rowdata.id}
+								class="font-bold text-green-500"
+								on:click|once={async () => {
+									// insertAppliedJob;
+									const storedData = sessionStorage.getItem('supabaseSession');
+									if (storedData === null) {
+										return;
 									}
-								} else {
-									alert('You Have Already Applied !!!');
-									changeText(rowdata.id);
-									return;
-								}
-							}}
-						>
-							<ActionButton textColor="blue-700" hoverColor="gray-200" buttonBg="gray-100">
-								<span slot="text">Apply Now</span>
-							</ActionButton>
-						</button>
+									const checkAppliedJob = await checkAppliedJobs(
+										rowdata.id,
+										JSON.parse(storedData)
+									);
+									if (checkAppliedJob !== undefined && checkAppliedJob.length === 0) {
+										let insertError = await insertIntoAppliedJobs(
+											rowdata.id,
+											JSON.parse(storedData)
+										);
+										// let insertError = null;
+										if (insertError === null) {
+											changeText(rowdata.id);
+											alert("Application Successful, Navigate to 'Applied Jobs'  to see jobs");
+										} else {
+											console.log('this is the error', insertError);
+										}
+									} else {
+										alert('You Have Already Applied !!!');
+										changeText(rowdata.id);
+										return;
+									}
+								}}
+							>
+								<ActionButton textColor="blue-700" hoverColor="gray-200" buttonBg="gray-100">
+									<span slot="text">Apply Now</span>
+								</ActionButton>
+							</button>
+						</div>
 					</div>
 				</div>
 			{/each}
@@ -133,3 +156,29 @@
 	{/await}
 	<!-- Table Body ends -->
 </div>
+<Modal
+	outsideclose
+	color="blue"
+	size="lg"
+	title="Job Description"
+	bind:open={defaultModal}
+	autoclose
+>
+	
+	<!-- table body  job_id-->
+	{#await rows}
+		<Spinner color="blue" size={8} />
+	{:then row}
+		{#if row !== null}
+					<div
+						class=" flex items-center justify-center gap-5 p-2 text-center font-mono text-gray-800 shadow uppercase"
+					>
+					<div>
+						{row[jobArray_index].jobDescription}
+					</div>
+						
+					</div>
+				
+		{/if}
+	{/await}
+</Modal>
