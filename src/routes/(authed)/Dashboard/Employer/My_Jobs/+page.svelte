@@ -3,16 +3,18 @@
 	import ActionButton from '$lib/components/ActionButton.svelte';
 	import { Spinner } from 'flowbite-svelte';
 	import { Button, Modal } from 'flowbite-svelte';
+	const storedData = sessionStorage.getItem('supabaseSession');
+
 	let defaultModal = false;
 	export let data;
 	let jobId: Int8Array;
-	data.jobAndApplicantsResults.then((data) => {
-		console.log('data', data);
-	});
+	// data.jobAndApplicantsResults.then((data) => {
+	// 	console.log('data', data);
+	// });
 	let rows = data.jobTableResult;
 	let jobAndApplicantsRow = data.jobAndApplicantsResults;
 	let applicants: number = 0;
-	let applied_id: Int8Array
+	let applied_id: Int8Array;
 </script>
 
 <div class="w-full space-y-3 overflow-y-auto">
@@ -35,40 +37,42 @@
 	{:then row}
 		{#if row !== null}
 			{#each row as rowdata}
-				<div
-					class="grid grid-cols-2 items-center justify-between gap-5 p-2 text-center font-mono shadow"
-				>
-					<div class="gap- flex flex-row">
-						<div class="grid-col-2 flex h-full w-full flex-col items-center justify-center gap-3">
-							<div class="text-md flex w-full items-center justify-between">
-								<span>{rowdata.jobTitle}</span>
-								<span class="text-nowrap rounded-sm bg-green-100 px-2 py-1">
-									<div class="text-xs font-semibold uppercase leading-3 text-green-600">
-										<slot name="role">{rowdata.remote === null ? '' : rowdata.remote}</slot>
-									</div>
-								</span>
-							</div>
-							<div class="flex w-full flex-row justify-between text-gray-500">
-								<span>{rowdata.country}</span>
-								<span>${rowdata.minSalary}-{rowdata.maxSalary}k/month</span>
+				{#if rowdata.employer_id === storedData}
+					<div
+						class="grid grid-cols-2 items-center justify-between gap-5 p-2 text-center font-mono shadow"
+					>
+						<div class="gap- flex flex-row">
+							<div class="grid-col-2 flex h-full w-full flex-col items-center justify-center gap-3">
+								<div class="text-md flex w-full items-center justify-between">
+									<span>{rowdata.jobTitle}</span>
+									<span class="text-nowrap rounded-sm bg-green-100 px-2 py-1">
+										<div class="text-xs font-semibold uppercase leading-3 text-green-600">
+											<slot name="role">{rowdata.remote === null ? '' : rowdata.remote}</slot>
+										</div>
+									</span>
+								</div>
+								<div class="flex w-full flex-row justify-between text-gray-500">
+									<span>{rowdata.country}</span>
+									<span>${rowdata.minSalary}-{rowdata.maxSalary}k/month</span>
+								</div>
 							</div>
 						</div>
+						<div class="grid grid-cols-3 items-center justify-center text-sm text-gray-500">
+							<div>{applicants} Applications</div>
+							<div class="text-green-700">Active</div>
+							<button
+								on:click={() => {
+									jobId = rowdata.id;
+									defaultModal = true;
+								}}
+							>
+								<ActionButton textColor="blue-700" hoverColor="gray-200" buttonBg="gray-100">
+									<span slot="text">View <br /> Applications</span>
+								</ActionButton>
+							</button>
+						</div>
 					</div>
-					<div class="grid grid-cols-3 items-center justify-center text-sm text-gray-500">
-						<div>{applicants} Applications</div>
-						<div class="text-green-700">Active</div>
-						<button
-							on:click={() => {
-								jobId = rowdata.id;
-								defaultModal = true;
-							}}
-						>
-							<ActionButton textColor="blue-700" hoverColor="gray-200" buttonBg="gray-100">
-								<span slot="text">View <br /> Applications</span>
-							</ActionButton>
-						</button>
-					</div>
-				</div>
+				{/if}
 			{/each}
 		{/if}
 	{/await}
@@ -111,19 +115,35 @@
 						<!--  -->
 
 						<div>{rowdata.raw_user_meta_data.email}</div>
-						<div class="flex w-full gap-2">
+						<div class="flex w-full flex-col gap-2">
+							<div>
+								<button
+									on:click={() => {
+										alert(' Candidate Accepted');
+									}}
+								>
+									<ActionButton textColor="blue-700" hoverColor="green-200" buttonBg="green-100">
+										<span slot="text">Accept</span>
+									</ActionButton>
+								</button>
+								<button
+									on:click={() => {
+										alert(' Candidate Accepted');
+									}}
+								>
+									<ActionButton textColor="blue-700" hoverColor="red-200" buttonBg="red-100">
+										<span slot="text">Reject</span>
+									</ActionButton>
+								</button>
+							</div>
 							<button
-								on:click={() => {
-									alert(' Candidate Accepted');
-								}}
+								class="flex w-full items-center justify-center"
+								on:click={() => alert('C.V Downloaded')}
 							>
 								<ActionButton textColor="blue-700" hoverColor="gray-200" buttonBg="gray-100">
-									<span slot="text">Accept</span>
+									<span slot="text">Download C.V</span>
 								</ActionButton>
 							</button>
-							<ActionButton textColor="blue-700" hoverColor="gray-200" buttonBg="gray-100">
-								<span slot="text">Download C.V</span>
-							</ActionButton>
 						</div>
 					</div>
 				{/if}

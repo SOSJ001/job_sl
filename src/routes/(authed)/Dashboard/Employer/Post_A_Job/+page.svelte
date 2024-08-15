@@ -2,6 +2,8 @@
 	//@ts-nocheck
 	import ActionButton from '$lib/components/ActionButton.svelte';
 	import { insertIntoJobTable } from '$lib/supabase/store';
+	const storedData = sessionStorage.getItem('supabaseSession');
+
 	let jobTitle;
 	let jobTags;
 	let jobRole;
@@ -37,7 +39,8 @@
 			city.value,
 			remote,
 			jobBenefit.value,
-			jobDescription.value
+			jobDescription.value,
+			storedData
 		);
 		if(insertError === null){
 			alert("Job Successfuly Inserted, Navigate to 'My Jobs' to see jobs")

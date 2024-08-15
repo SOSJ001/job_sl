@@ -2,7 +2,7 @@
 	import bookmark from '$lib/icon/BookmarkSimple.png';
 	import mapPin from '$lib/icon/grayMapPin.png';
 	import orange from '$lib/icon/orange.png';
-    export let bg: string = "gradient-to-r from-yellow-50 to-white"
+	export let bg: string = 'gradient-to-r from-yellow-50 to-white';
 </script>
 
 <div
@@ -14,7 +14,9 @@
 			<slot name="title">Techical Support Specialist</slot>
 		</div>
 		<div class="inline-flex items-start justify-start gap-2">
-			<div class="flex items-start justify-start gap-2.5 rounded-sm bg-green-100 px-2 py-1 text-nowrap">
+			<div
+				class="flex items-start justify-start gap-2.5 text-nowrap rounded-sm bg-green-100 px-2 py-1"
+			>
 				<div class=" text-xs font-semibold uppercase leading-3 text-green-600">
 					<slot name="role">FULL TIME</slot>
 				</div>
@@ -27,9 +29,13 @@
 	<!-- first row ends -->
 
 	<!-- second row -->
-	<div class="justify-between inline-flex w-full items-center gap-3">
+	<div class="inline-flex w-full items-center justify-between gap-3">
 		<div class="flex gap-3">
-			
+			<div class="h-14">
+				<slot name="companylogo">
+					<img alt="company logo" src={orange} class="h-14" />
+				</slot>
+			</div>
 			<div class="inline-flex flex-col items-start justify-start gap-1">
 				<div class="self-stretch text-base font-medium leading-normal text-zinc-900">
 					<slot name="company name">Orange SL</slot>

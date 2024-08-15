@@ -15,6 +15,7 @@ export async function signin(email: string, password: string) {
 	};
 }
 
+
 export async function signup(
 	first_name: string,
 	last_name: string,
@@ -77,7 +78,8 @@ export async function insertIntoJobTable(
 	city: string,
 	remote: string,
 	jobBenefit: string,
-	jobDescription: string
+	jobDescription: string,
+	employer_id: string
 ) {
 	const { error } = await supabase.from('jobTable').insert({
 		jobTitle: jobTitle,
@@ -92,7 +94,8 @@ export async function insertIntoJobTable(
 		city: city,
 		remote: remote,
 		jobBenefit: jobBenefit,
-		jobDescription: jobDescription
+		jobDescription: jobDescription,
+		employer_id :employer_id
 	});
 	return error;
 }

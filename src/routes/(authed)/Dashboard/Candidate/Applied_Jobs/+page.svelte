@@ -4,6 +4,7 @@
 	import { Spinner } from 'flowbite-svelte';
 	export let data;
 	const storedData = sessionStorage.getItem('supabaseSession');
+
 	// data.appliedjobsviewResult.then((data) => {
 	// 	console.log('data', data);
 	// });
@@ -28,45 +29,49 @@
 	{#await rows}
 		<Spinner color="blue" size={8} />
 	{:then row}
-		{#if row !== null}
-			{#each row as rowdata}
-			{#if rowdata.user_id === JSON.parse(storedData)}
-				<div
-					class="grid grid-cols-2 items-center justify-between gap-5 p-2 text-center font-mono shadow"
-				>
-					<div class="flex flex-row gap-2">
-						<div>
-							<div class="h-14 w-14">
-								<slot name="companylogo"><img alt="company_logo" class="w-14" src={orange} /></slot>
-							</div>
-						</div>
-						<div class="grid-col-2 flex h-full w-full flex-col items-center justify-center gap-3">
-							<div class="text-md flex w-full items-center justify-between">
-								<span>{rowdata.jobTitle}</span>
-								<span class="text-nowrap rounded-sm bg-green-100 px-2 py-1">
-									<div class="text-xs font-semibold uppercase leading-3 text-green-600">
-										<slot name="role">{rowdata.remote === null ? '' : rowdata.remote}</slot>
+		{#if storedData !== null}
+			{#if row !== null}
+				{#each row as rowdata}
+					{#if rowdata.user_id === JSON.parse(storedData)}
+						<div
+							class="grid grid-cols-2 items-center justify-between gap-5 p-2 text-center font-mono shadow"
+						>
+							<div class="flex flex-row gap-2">
+								<div>
+									<div class="h-14 w-14">
+										<slot name="companylogo"
+											><img alt="company_logo" class="w-14" src={orange} /></slot
+										>
 									</div>
-								</span>
+								</div>
+								<div
+									class="grid-col-2 flex h-full w-full flex-col items-center justify-center gap-3"
+								>
+									<div class="text-md flex w-full items-center justify-between">
+										<span>{rowdata.jobTitle}</span>
+										<span class="text-nowrap rounded-sm bg-green-100 px-2 py-1">
+											<div class="text-xs font-semibold uppercase leading-3 text-green-600">
+												<slot name="role">{rowdata.remote === null ? '' : rowdata.remote}</slot>
+											</div>
+										</span>
+									</div>
+									<div class="flex w-full flex-row justify-between text-gray-500">
+										<span>{rowdata.country}</span>
+										<span>${rowdata.minSalary}-{rowdata.maxSalary}k/month</span>
+									</div>
+								</div>
 							</div>
-							<div class="flex w-full flex-row justify-between text-gray-500">
-								<span>{rowdata.country}</span>
-								<span>${rowdata.minSalary}-{rowdata.maxSalary}k/month</span>
+							<div class="grid grid-cols-3 items-center justify-center text-sm">
+								<div>{new Date(rowdata.created_at)}</div>
+								<div class="text-green-700">{rowdata.status}</div>
+								<button>
+									<span class="font-bold text-green-500">Applied</span>
+								</button>
 							</div>
 						</div>
-					</div>
-					<div class="grid grid-cols-3 items-center justify-center text-sm">
-						<div>{new Date(rowdata.created_at)}</div>
-						<div class="text-green-700">Pending</div>
-						<button>
-							<span class="font-bold text-green-500">Applied</span>
-						</button>
-					</div>
-				</div>
+					{/if}
+				{/each}
 			{/if}
-			
-				
-			{/each}
 		{/if}
 	{/await}
 
