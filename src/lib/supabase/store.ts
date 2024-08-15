@@ -15,7 +15,6 @@ export async function signin(email: string, password: string) {
 	};
 }
 
-
 export async function signup(
 	first_name: string,
 	last_name: string,
@@ -95,7 +94,7 @@ export async function insertIntoJobTable(
 		remote: remote,
 		jobBenefit: jobBenefit,
 		jobDescription: jobDescription,
-		employer_id :employer_id
+		employer_id: employer_id
 	});
 	return error;
 }
@@ -118,18 +117,6 @@ export async function loadAppliedJobRows() {
 	return AppliedJob;
 }
 
-export function uuidToBigInt(uuid: string) {
-	// Remove hyphens from UUID
-	const cleanedUuid = uuid.replace(/-/g, '');
-
-	// Ensure the cleaned UUID is 32 hex characters long
-	if (cleanedUuid.length !== 32) {
-		throw new Error('Invalid UUID format');
-	}
-
-	// Convert the hex string to a BigInt
-	return BigInt('0x' + cleanedUuid);
-}
 
 export async function appliedjobsview() {
 	let { data: appliedjobsview, error } = await supabase.from('appliedjobsview').select('*');
@@ -139,4 +126,18 @@ export async function appliedjobsview() {
 export async function jobAndApplicants() {
 	let { data: jobandapplicants, error } = await supabase.from('jobandapplicants').select('*');
 	return jobandapplicants;
+}
+
+export async function checkAppliedJobs(job_id: Int8Array, user_id: string) {
+	let { data: appliedJobs, error } = await supabase
+		.from('appliedJobs')
+		.select('*')
+		.eq('job_id', job_id)
+		.eq('user_id', user_id);
+	if (error) {
+		console.log("check applied job function error \n",error)
+	}
+	if (appliedJobs !== null) {
+		return appliedJobs;
+	}
 }

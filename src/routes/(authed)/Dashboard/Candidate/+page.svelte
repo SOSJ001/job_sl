@@ -4,16 +4,16 @@
 	import ActionButton from '$lib/components/ActionButton.svelte';
 	import orange from '$lib/icon/orange.png';
 	import { Spinner } from 'flowbite-svelte';
-	import { insertIntoAppliedJobs, uuidToBigInt } from '$lib/supabase/store.js';
+	import { insertIntoAppliedJobs, checkAppliedJobs } from '$lib/supabase/store.js';
 	export let data;
 	// data.relatedJobTableResult.then((data) => {
 	// 	console.log('data', data);
 	// });
 	let rows = data.relatedJobTableResult;
 	// console.log(rows)
-	function changeText(id: string){
-		 const button = document.getElementById(id);
-		 if(button !== null) button.innerText = "APPLIED";
+	function changeText(id: string) {
+		const button = document.getElementById(id);
+		if (button !== null) button.innerText = 'APPLIED';
 	}
 
 	// put the job id in the button pass as param to the insert into applied job tables
@@ -96,24 +96,34 @@
 					<div class="grid grid-cols-3 items-center justify-center text-sm">
 						<div>{new Date(rowdata.created_at)}</div>
 						<div class="text-green-700">Active</div>
-						<button id="{rowdata.id}" class="text-green-500 font-bold"
+						<button
+							id={rowdata.id}
+							class="font-bold text-green-500"
 							on:click|once={async () => {
 								// insertAppliedJob;
 								const storedData = sessionStorage.getItem('supabaseSession');
-								if(storedData === null) {return}
-								let insertError = await insertIntoAppliedJobs(rowdata.id, JSON.parse(storedData));
-								// alert(JSON.parse(storedData))
-								// let insertError = null
-								if (insertError === null) {
-									changeText(rowdata.id)
-									alert("Application Successful, Navigate to 'Applied Jobs'  to see jobs");
+								if (storedData === null) {
+									return;
+								}
+								const checkAppliedJob = await checkAppliedJobs(rowdata.id, JSON.parse(storedData));
+								if (checkAppliedJob !== undefined && checkAppliedJob.length === 0) {
+									// let insertError = await insertIntoAppliedJobs(rowdata.id, JSON.parse(storedData));
+									let insertError = null;
+									if (insertError === null) {
+										changeText(rowdata.id);
+										alert("Application Successful, Navigate to 'Applied Jobs'  to see jobs");
+									} else {
+										console.log('this is the error', insertError);
+									}
 								} else {
-									console.log("this is the error", insertError);
+									alert('You Have Already Applied!!!');
+									changeText(rowdata.id);
+									return;
 								}
 							}}
 						>
 							<ActionButton textColor="blue-700" hoverColor="gray-200" buttonBg="gray-100">
-								<span  slot="text">Apply Now</span>
+								<span slot="text">Apply Now</span>
 							</ActionButton>
 						</button>
 					</div>
