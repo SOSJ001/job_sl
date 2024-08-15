@@ -107,8 +107,8 @@
 								}
 								const checkAppliedJob = await checkAppliedJobs(rowdata.id, JSON.parse(storedData));
 								if (checkAppliedJob !== undefined && checkAppliedJob.length === 0) {
-									// let insertError = await insertIntoAppliedJobs(rowdata.id, JSON.parse(storedData));
-									let insertError = null;
+									let insertError = await insertIntoAppliedJobs(rowdata.id, JSON.parse(storedData));
+									// let insertError = null;
 									if (insertError === null) {
 										changeText(rowdata.id);
 										alert("Application Successful, Navigate to 'Applied Jobs'  to see jobs");
