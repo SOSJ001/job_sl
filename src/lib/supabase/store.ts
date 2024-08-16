@@ -141,3 +141,13 @@ export async function checkAppliedJobs(job_id: Int8Array, user_id: string) {
 		return appliedJobs;
 	}
 }
+
+export async function updateCandidateStatus(status: string, applied_id: Int8Array) {
+	const { data, error } = await supabase
+		.from('appliedJobs')
+		.update({ status: status })
+		.eq('id', applied_id)
+		.select();
+	return{data, error}
+}
+

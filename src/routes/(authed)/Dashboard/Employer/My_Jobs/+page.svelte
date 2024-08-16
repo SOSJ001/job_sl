@@ -3,8 +3,11 @@
 	import ActionButton from '$lib/components/ActionButton.svelte';
 	import { Spinner } from 'flowbite-svelte';
 	import { Button, Modal } from 'flowbite-svelte';
+	import { updateCandidateStatus } from '$lib/supabase/store.js';
 	const storedData = sessionStorage.getItem('supabaseSession');
 
+	let Accept = false;
+	let Reject = false;
 	let defaultModal = false;
 	export let data;
 	let jobId: Int8Array;
@@ -14,6 +17,7 @@
 	let rows = data.jobTableResult;
 	let jobAndApplicantsRow = data.jobAndApplicantsResults;
 	let applicants: number = 0;
+	let myJobs
 	let applied_id: Int8Array;
 </script>
 
@@ -118,21 +122,45 @@
 						<div class="flex w-full flex-col gap-2">
 							<div>
 								<button
-									on:click={() => {
-										alert(' Candidate Accepted');
+									on:click={async () => {
+										Accept = true;
+										// rowdata.applied_id
+										let updateStatus = await updateCandidateStatus('Accepted', rowdata.applied_id);
+										if (updateStatus.error === null) {
+											alert(' Candidate Accepted');
+											Accept = false;
+										} else {
+											console.log('updateCandidateStatus', updateStatus.error);
+										}
 									}}
 								>
 									<ActionButton textColor="blue-700" hoverColor="green-200" buttonBg="green-100">
-										<span slot="text">Accept</span>
+										<div class="space-x-2" slot="text">
+											<span>Accept</span>{#if Accept}
+												<Spinner color="blue" size={4} />
+											{/if}
+										</div>
 									</ActionButton>
 								</button>
 								<button
-									on:click={() => {
-										alert(' Candidate Accepted');
+									on:click={async (e) => {
+										Reject = true;
+										// rowdata.applied_id
+										let updateStatus = await updateCandidateStatus('Rejected', rowdata.applied_id);
+										if (updateStatus.error === null) {
+											alert('Candidate Rejected');
+											Reject = false;
+										} else {
+											console.log('updateCandidateStatus', updateStatus.error);
+										}
 									}}
 								>
 									<ActionButton textColor="blue-700" hoverColor="red-200" buttonBg="red-100">
-										<span slot="text">Reject</span>
+										<div class="space-x-2" slot="text">
+											<span>Reject</span>{#if Reject}
+												<Spinner color="blue" size={4} />
+											{/if}
+										</div>
 									</ActionButton>
 								</button>
 							</div>
